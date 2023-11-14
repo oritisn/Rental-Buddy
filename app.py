@@ -17,7 +17,7 @@ app.app_context().push()
 SECRET_KEY = os.urandom(32)
 # SECRET_KEY = "set value for testing"
 app.config['SECRET_KEY'] = SECRET_KEY
-app.config['SESSION_COOKIE_SECURE'] = False #Localhosting uses http not https, therefore:
+app.config['SESSION_COOKIE_SECURE'] = False #Localhosting uses http not https:
 lm= LoginManager()
 lm.init_app(app)
 lm.login_view = "User/Add"

@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <title>
+
+    </title>
+  </head>
+  <body>
+    <form method="post">
+      <fieldset>
+           <legend>
+             <h1 class="form"> Registration Form</h1>
+            {{form.hidden_tag()}}
+      </legend>
+      <div>{{form.username.label}}
+                  {{form.username(size=20)}}
+      </div>
+        <br>
+
+        <div>{{form.password.label}}
+        {{form.password(size=20)}}</div>
+        <br>
+        <div>{{form.confirm_password.label}}
+            {{form.confirm_password(size=20)}}</div><br>
+        <div>{{form.category.label}}
+        {{form.category(size=20,style='height: 6%;')}}</div>
+        <br>
+        <div>
+      {{form.first_name.label}}
+                  {{form.first_name(size=20)}}
+      </div>
+      <br>
+      <div>
+        {{form.last_name.label}}
+                  {{form.last_name(size=20)}}</div>
+      <br>
+      <div>{{form.date_of_birth.label}}
+                  {{form.date_of_birth(size=20)}}</div>
+      <br>
+      <div>
+      {{form.email.label}}
+                  {{form.email(size=20)}}
+      </div>
+      <br>
+      <div>
+      {{form.phone_number.label}}
+                  {{form.phone_number(size=20)}}
+      </div> <br>
+      <div> {{form.address.label}}
+                  {{form.address(size=20)}}
+      </div>
+      <br>
+      <div>{{form.gender.label}}
+                  {{form.gender(size=20)}} </div>
+      <br>
+      <div> {{form.course_IELTS.label}}
+        {{form.course_IELTS(size=20)}}
+        {{form.course_B1.label}}
+        {{form.course_B1(size=20)}}
+        {{form.course_Grammar.label}}
+        {{form.course_Grammar(size=20)}}
+      </div>
+      <br>
+      <div> {{form.submit(size=20)}}
+      </div>
+          {% with messages = get_flashed_messages() %}
+ {% if messages %}
+  <ul>
+  {% for message in messages %}
+    {{ message }}
+  {% endfor %}
+  </ul>
+ {% endif %}
+{% endwith %}
+      </fieldset>
+
+    </form>
+
+  </body>
+</html>

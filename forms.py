@@ -21,10 +21,10 @@ class UserForm(FlaskForm):
     username = StringField("Username", validators=[InputRequired()])
     password = PasswordField("Password", validators=[InputRequired()])
     confirm_password = PasswordField("Confirm Password", validators=[InputRequired()])
-    category = RadioField("CATEGORY",choices=(("Teacher", "Teacher"), ("Student", "Student"))
-                          ,validators=[InputRequired()])
-    email = EmailField(label="Email",validators=[InputRequired(), Email()])
-    register = SubmitField("Submit")
+    category = RadioField("CATEGORY", choices=(("Teacher", "Teacher"), ("Student", "Student"))
+                          , validators=[InputRequired()])
+    email = EmailField(label="Email", validators=[InputRequired(), Email()])
+    submit = SubmitField("Submit")
 
 
 class SettingsForm(FlaskForm):
