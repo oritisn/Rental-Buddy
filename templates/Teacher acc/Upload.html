@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>home</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<header class="header">
+   
+   <section class="flex">
+
+      <a href="home.html" class="logo">Endeavour.Learning</a>
+
+      <form action="search.html" method="post" class="search-form">
+         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+      </form>
+
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></i></div>
+         <div id="search-btn" class="fas fa-magnifying-glass-plus fa-spin"></i></div>
+         <div id="user-btn" class="fa-solid fa-user-graduate"></i></div>
+         <div id="toggle-btn" class="fa-regular fa-lightbulb"></i></div>
+      </div>
+
+      <div class="profile">
+         <img src="C:\Users\Student\Downloads\front-end - Endeavour website (1)\desgin\images\pic-3.jpg" class="image" alt="">
+         <h3 class="name">Avery Davis</h3>
+         <p class="role">Teacher</p>
+         <a href="profile.html" class="btn">View profile</a>
+         <div class="flex-btn">
+            <a href="login.html" class="option-btn">Logout</a>
+         </div>
+      </div>
+
+   </section>
+
+</header>   
+
+<div class="side-bar">
+
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+
+   <div class="profile">
+      <img src="C:\Users\Student\Downloads\front-end - Endeavour website (1)\desgin\images\pic-3.jpg" class="image" alt="">
+      <h3 class="name">Avery Davis</h3>
+      <p class="role">Teacher</p>
+      <a href="profile.html" class="btn">View profile</a>
+   </div>
+
+   <nav class="navbar">
+    <a href="home.html"><i class="fas fa-house-user"></i></i><span>Home</span></a>
+    <a href="Upload.html"><i class="fa-solid fa-upload"></i></i><span>Upload</span></a>
+    <a href="courses.html"><i class="fas fa-person-chalkboard"></i></i><span>Courses</span></a>
+    <a href="contact.html"><i class="fas fa-phone"></i></i><span>Contact us</span></a>
+   </nav>
+
+</div>
+
+
+
+<section class="Upload">
+
+<div class="wrapper">
+    <header> File upload</header>
+    <form action ="#">
+        <input class= "file-input" type="file" name="file" hidden>
+        <i class="fas fa-cloud-upload-alt"></i>
+        <p>Browse File to Upload</p>
+      </form>
+      <section class="progress-area"></section>
+      <section class="uploaded-area"></section>
+    </div>
+    <script src="script.js"></script>
+  </body>
+  </html>
+  
+
