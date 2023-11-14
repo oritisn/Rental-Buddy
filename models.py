@@ -83,7 +83,8 @@ def recreate_all_databases():
     Drops then creates all databases as part of its db object. Therefore, all rows/columns are reset
     Use this instead of drop_all/create_all! This adds things that must be present
 
-    NOTE: DB Browser extension connected to db locks the database. Make sure it's disconnected before running this command or any other command which reads/writes the db
+    NOTE: DB Browser extension connected to db locks the database. Make sure it's disconnected before running this
+    command, or any other command which reads/writes the db
     """
     db.drop_all()
     print("Dropped")
