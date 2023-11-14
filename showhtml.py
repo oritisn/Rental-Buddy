@@ -1,7 +1,7 @@
 # Helper file: Used to print the raw HTML that flask will produce using the form.
 # For example, if in a form we use {{form.username}}, we can use this file to see what that html looks like
 
-from forms import UserForm, LogoutForm
+from forms import UserForm
 
 from app import app
 

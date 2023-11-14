@@ -1,12 +1,7 @@
-import os.path
 from datetime import datetime
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from os import urandom
-from sqlalchemy import ForeignKey
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from app import app, db, lm
+from app import db
 
 Category_User = db.Table('category_user',
                          db.Column("user_id", db.Integer, db.ForeignKey('user.id')),

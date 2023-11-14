@@ -1,13 +1,13 @@
 import sqlalchemy.exc
 
-from flask import Flask, render_template, request, flash, redirect, url_for
-from flask_login import LoginManager, login_user, current_user, logout_user
-from forms import UserForm, LoginForm, LogoutForm, SettingsForm
+from flask import render_template, request, redirect, url_for
+from flask_login import login_user, current_user, logout_user
+from forms import UserForm, LoginForm, LogoutForm
 
 from app import app, db, lm
 # import models #import after importing app and db always
 
-from models import User, Category, Course, Course_User, recreate_all_databases
+from models import User, Course
 
 
 # recreate_all_databases()

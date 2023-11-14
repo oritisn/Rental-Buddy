@@ -9,6 +9,7 @@ from wtforms.validators import InputRequired, Email
 from os import urandom
 from flask_login import LoginManager
 basedir = os.path.abspath(os.path.dirname(__file__))
+print(basedir)
 app = Flask(__name__,static_url_path='',static_folder='static')
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + os.path.join(basedir, 'db.sqlite')
 db = SQLAlchemy(app)
