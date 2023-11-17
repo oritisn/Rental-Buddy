@@ -18,15 +18,12 @@ class LogoutForm(FlaskForm):
 
 
 class UserForm(FlaskForm):
-    username = StringField("Username", validators=[InputRequired()])
+    username = StringField("Username", validators=[InputRequired()])                    #UNIQUE
     password = PasswordField("Password", validators=[InputRequired()])
     confirm_password = PasswordField("Confirm Password", validators=[InputRequired()])
-    category = RadioField("CATEGORY", choices=(("Teacher", "Teacher"), ("Student", "Student"))
-                          , validators=[InputRequired()])
-    email = EmailField(label="Email", validators=[InputRequired(), Email()])
+    email = EmailField(label="Email", validators=[InputRequired(), Email()])                 #UNIQUE
+    security_number = StringField("Security Number",validators=[InputRequired()])       #UNIQUE?
     submit = SubmitField("Submit")
-
-
 class SettingsForm(FlaskForm):
     password = PasswordField("PASSWORD")
     category = SelectField("CATEGORY", choices=(("Teacher", "teacher"), ("Student", "Student")))
