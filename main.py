@@ -166,7 +166,7 @@ def add_user():
                 f.write(str(toAddUser))
 
             db.session.add(toAddUser)
-            del toAddUser
+
             print("Committing")
             try:
                 db.session.commit()
@@ -183,7 +183,9 @@ def add_user():
                 with open('textoutput.txt', 'a') as f:
                     f.write(f'\n\n\nPending Rollback Error > {err} < Pending Rollback Error')
                 db.session.rollback()
-            return redirect("/Check",code=301)
+            login_user(toAddUser)
+            del toAddUser
+            return redirect("/User/Check",code=301)
         else:
             form=UserForm()
             return render_template("add_user.html",form=form,errors=validatedform)

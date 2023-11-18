@@ -2,8 +2,6 @@
 <html lang="en">
 {% if current_user.is_authenticated %}
   Hi {{ current_user.username }}!
-  {{current_user.date_of_birth}}!
-  {{current_user.gender}}
 <form method="post">{{form.hidden_tag()}}
   {{form.submit(size=20)}}</form>
 
