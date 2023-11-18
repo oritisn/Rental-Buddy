@@ -38,9 +38,9 @@ from app import db
 #         return f'<Category "{self.name}">'
 #
 #
-class Class(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200), nullable=False)
+# class Class(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String(200), nullable=False)
 
 Property_Tenant = db.Table("property_tenant",
                            db.Column("property_id", db.Integer, db.ForeignKey('property.id')),
