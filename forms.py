@@ -1,7 +1,7 @@
 from wtforms import StringField, SubmitField, IntegerField, RadioField, \
     DateField, EmailField, PasswordField, SelectMultipleField, BooleanField, SelectField
 from flask_wtf import FlaskForm
-from wtforms.validators import InputRequired, Email
+from wtforms.validators import InputRequired, Email, Length
 
 
 class LoginForm(FlaskForm):
@@ -19,7 +19,7 @@ class LogoutForm(FlaskForm):
 
 class UserForm(FlaskForm):
     username = StringField("Username", validators=[InputRequired()])                    #UNIQUE
-    password = PasswordField("Password", validators=[InputRequired()])
+    password = PasswordField("Password", validators=[InputRequired(),Length(min=3,message="Password too short")])
     confirm_password = PasswordField("Confirm Password", validators=[InputRequired()])
     email = EmailField(label="Email", validators=[InputRequired(), Email()])                 #UNIQUE
     security_number = StringField("Security Number",validators=[InputRequired()])       #UNIQUE?

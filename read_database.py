@@ -1,4 +1,5 @@
-"""Used to read what's in the database"""
+"""Helper file. Not intended to be imported.
+Used to read what's in the database"""
 
 import os
 import pandas as pd

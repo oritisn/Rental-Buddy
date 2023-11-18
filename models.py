@@ -65,8 +65,7 @@ class User(UserMixin, db.Model):
         """Create hashed password."""
         print(password)
         hashed = generate_password_hash(
-            password,
-            method='sha256'
+            password
         )
         return hashed
 
@@ -82,8 +81,6 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return f'User: {self.username}' \
-               f'first name: {self.first_name}' \
-               f'lastname: {self.last_name}' \
                f'email: {self.email}' \
                f'date added: {self.date_added}' \
                f'security number: {self.security_number}'
@@ -91,12 +88,12 @@ class User(UserMixin, db.Model):
 
 class Tenant(db.Model):
     tenant_id = db.Column(db.Integer, primary_key=True)
-    user_id = db.relationship("user", backref="Tenant", lazy=True)
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
     # properties = db.Column()
 
 class Landlord(db.Model):
     landlord_id = db.Column(db.Integer, primary_key=True)
-    user_id = db.relationship("user", backref="Tenant", lazy=True)
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
 
 
 class Property(db.Model):
