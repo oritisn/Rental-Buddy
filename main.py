@@ -123,15 +123,15 @@ def checkUniqueness(column, form):
 def validateAddUser(form):
     """extracted from add_user
     checks the form to see if each validated.
-    Form validators can check for some things but others must be checked in more complex ways."""
+    Form validators can check for some things but others must be checked in more complex ways.
+    Returns a list of failed checks"""
     # Password match check
     failures = []
     pass1 = form.password.data
     pass2 = form.confirm_password.data
-    if pass1 == pass2:
+    if pass1 != pass2:
         failures.append("Passwords don't match")
     columns = ("username", "email", "security_number")
-    columncount = 0
     for column in columns:
         if not checkUniqueness(column, form):
             failures.append(f'{column} is not unique ')
@@ -183,7 +183,6 @@ def add_user():
                 with open('textoutput.txt', 'a') as f:
                     f.write(f'\n\n\nPending Rollback Error > {err} < Pending Rollback Error')
                 db.session.rollback()
-            #return render_template("add_user.html", form=form)
             return redirect("/Check",code=301)
         else:
             form=UserForm()
