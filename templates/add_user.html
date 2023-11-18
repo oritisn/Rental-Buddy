@@ -11,6 +11,11 @@
              <h1 class="form"> Registration Form</h1>
             {{form.hidden_tag()}}
       </legend>
+          <div>
+              {%   if errors != None  %}
+                {{errors}}
+              {%   endif   %}
+          </div>
       <div>{{form.username.label}}
                   {{form.username(size=20)}}
       </div>

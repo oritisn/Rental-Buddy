@@ -3,6 +3,7 @@ import sqlalchemy.exc
 from flask import render_template, request, redirect, url_for
 from flask_login import login_user, current_user, logout_user
 from forms import UserForm, LoginForm, LogoutForm
+from flask_wtf.csrf import CSRFError
 
 from app import app, db, lm
 # import models #import after importing app and db always
@@ -11,6 +12,9 @@ from models import User
 
 
 # recreate_all_databases()
+@app.errorhandler(CSRFError)
+def handle_csrf_error(e):
+    return render_template('csrf_error.html'), 400
 
 @lm.user_loader
 def user_loader(id):
@@ -64,13 +68,9 @@ def login_page():
                 password=register_form.password.data,
                 # first_name=register_form.first_name.data,
                 # last_name=register_form.last_name.data,
-                category=register_form.category.data,
                 email=register_form.email.data,
             )
             # Dont need to define date_added, its default is current time, leave it to use that
-            for course in ("IELTS", "B1", "Grammar"):
-                if request.form.get(f"course_{course}") == "y":
-                    toAddUser.courses.append(db.session.query(Course).filter(Course.name == course).first())
 
             with open('textoutput.txt', 'a') as f:
                 f.write(str(toAddUser))
@@ -132,10 +132,12 @@ def validateAddUser(form):
     else:
         passcheck = False
     columns = ("username", "email", "security_number")
+    failed_columns = []
     columncount = 0
     for column in columns:
         if checkUniqueness(column, form) is True:
             columncount += 1
+        else:failed_columns.append(column)
     if columncount == len(columns):
         uniquecheck = True
     else:
@@ -150,6 +152,13 @@ def validateAddUser(form):
 def add_user():
     form = UserForm()
     print(form.validate_on_submit())
+    """
+    Form validate on submit:
+        checks the validators attached to the form
+    validateAddUser:
+        checks the data against conditions that aren't on the form, such as uniqueness, or if the 
+        passwords match
+    """
     if form.validate_on_submit():  # valid form inputs
         if validateAddUser(form) is True:  # Including ones that have to be checked
             # server side such as uniqueness
@@ -160,9 +169,7 @@ def add_user():
                 security_number=form.security_number.data
             )
             # Dont need to define date_added, its default is current time, leave it to use that
-            for course in ("IELTS", "B1", "Grammar"):
-                if request.form.get(f"course_{course}") == "y":
-                    toAddUser.courses.append(db.session.query(Course).filter(Course.name == course).first())
+
 
             with open('textoutput.txt', 'a') as f:
                 f.write(str(toAddUser))
@@ -185,13 +192,17 @@ def add_user():
                 with open('textoutput.txt', 'a') as f:
                     f.write(f'\n\n\nPending Rollback Error > {err} < Pending Rollback Error')
                 db.session.rollback()
-            return render_template("add_user.html", form=form)
-    elif form.is_submitted():  # todo fix
-        if len(form.errors) == 0:
-            print("not errors")
-            return render_template("add_user.html", form=form, errors=form.errors)
+            #return render_template("add_user.html", form=form)
+            return redirect("/Check",code=301)
+        elif validateAddUser(form) = :
+
+
+
+    elif form.is_submitted():
         with open('textoutput.txt', 'a') as f:
-            f.write(f'else form.submit.errs{str(form.errors)}' + "\n")
+            f.write(f'form errors:'
+                    f'{str(form.errors)}' + "\n")
+            return render_template("add_user.html",form=form,errors=form.errors)
     return render_template("add_user.html", form=form, errors=None)
 
 
