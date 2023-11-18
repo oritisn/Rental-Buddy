@@ -125,27 +125,17 @@ def validateAddUser(form):
     checks the form to see if each validated.
     Form validators can check for some things but others must be checked in more complex ways."""
     # Password match check
+    failures = []
     pass1 = form.password.data
     pass2 = form.confirm_password.data
     if pass1 == pass2:
-        passcheck = True
-    else:
-        passcheck = False
+        failures.append("Passwords don't match")
     columns = ("username", "email", "security_number")
-    failed_columns = []
     columncount = 0
     for column in columns:
-        if checkUniqueness(column, form) is True:
-            columncount += 1
-        else:failed_columns.append(column)
-    if columncount == len(columns):
-        uniquecheck = True
-    else:
-        uniquecheck = False
-    if uniquecheck is True and passcheck is True:
-        return True
-    else:
-        return False
+        if not checkUniqueness(column, form):
+            failures.append(f'{column} is not unique ')
+    return failures
 
 
 @app.route('/User/Add', methods=['GET', 'POST'])
@@ -160,7 +150,8 @@ def add_user():
         passwords match
     """
     if form.validate_on_submit():  # valid form inputs
-        if validateAddUser(form) is True:  # Including ones that have to be checked
+        validatedform= validateAddUser(form)
+        if not validatedform:  # Including ones that have to be checked
             # server side such as uniqueness
             toAddUser = User(
                 username=form.username.data,
@@ -194,7 +185,9 @@ def add_user():
                 db.session.rollback()
             #return render_template("add_user.html", form=form)
             return redirect("/Check",code=301)
-        elif validateAddUser(form) = :
+        else:
+            form=UserForm()
+            return render_template("add_user.html",form=form,errors=validatedform)
 
 
 
