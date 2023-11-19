@@ -29,7 +29,7 @@ def check():
         logout_user()
         print("logout")
         redirect(url_for("check"))
-    return render_template("helloworld.html", form=form)
+    return render_template("check.html", form=form)
 
 
 @app.route('/User/Login', methods=['GET', 'POST'])
