@@ -8,13 +8,14 @@ from flask_wtf.csrf import CSRFError
 from app import app, db, lm
 # import models #import after importing app and db always
 
-from models import User
+from models import User, Tenant, Landlord
 
 
 # recreate_all_databases()
 @app.errorhandler(CSRFError)
 def handle_csrf_error(e):
     return render_template('csrf_error.html'), 400
+
 
 @lm.user_loader
 def user_loader(id):
@@ -53,7 +54,7 @@ def login_page():
             return redirect(url_for("check"))
         else:
             print("not a user")
-    return render_template('login.html',form=login_form)
+    return render_template('login.html', form=login_form)
 
 
 def checkUniqueness(column, form):
@@ -99,7 +100,7 @@ def add_user():
         passwords match
     """
     if form.validate_on_submit():  # valid form inputs
-        validatedform= validateAddUser(form)
+        validatedform = validateAddUser(form)
         if not validatedform:  # Including ones that have to be checked
             # server side such as uniqueness
             toAddUser = User(
@@ -109,8 +110,6 @@ def add_user():
                 security_number=form.security_number.data
             )
             # Dont need to define date_added, its default is current time, leave it to use that
-
-
             with open('textoutput.txt', 'a') as f:
                 f.write(str(toAddUser))
 
@@ -133,11 +132,20 @@ def add_user():
                     f.write(f'\n\n\nPending Rollback Error > {err} < Pending Rollback Error')
                 db.session.rollback()
             login_user(toAddUser)
+            # Add user to appropriate subclass of user
+            if form.landlord.data:
+                landlordToAdd = Landlord(user_id=toAddUser.id)
+                db.session.add(landlordToAdd)
+            if form.tenant.data:
+                tenantToAdd = Tenant(user_id=toAddUser.id)
+                db.session.add(tenantToAdd)
+            db.session.commit()
+
             del toAddUser
-            return redirect("/User/Check",code=301)
+            return redirect("/User/Check", code=301)
         else:
-            form=UserForm()
-            return render_template("add_user.html",form=form,errors=validatedform)
+            form = UserForm()
+            return render_template("add_user.html", form=form, errors=validatedform)
 
 
 
@@ -145,7 +153,7 @@ def add_user():
         with open('textoutput.txt', 'a') as f:
             f.write(f'form errors:'
                     f'{str(form.errors)}' + "\n")
-            return render_template("add_user.html",form=form,errors=form.errors)
+            return render_template("add_user.html", form=form, errors=form.errors)
     return render_template("add_user.html", form=form, errors=None)
 
 

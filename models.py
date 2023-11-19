@@ -89,11 +89,13 @@ class User(UserMixin, db.Model):
 class Tenant(db.Model):
     tenant_id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
-    # properties = db.Column()
-
+    def __init__(self,user_id):
+        self.user_id=user_id
 class Landlord(db.Model):
     landlord_id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
+    def __init__(self,user_id):
+        self.user_id=user_id
 
 
 class Property(db.Model):

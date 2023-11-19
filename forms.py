@@ -21,6 +21,8 @@ class UserForm(FlaskForm):
     confirm_password = PasswordField("Confirm Password", validators=[InputRequired()])
     email = EmailField(label="Email", validators=[InputRequired(), Email()])                 #UNIQUE
     security_number = StringField("Security Number",validators=[InputRequired()])       #UNIQUE?
+    tenant = BooleanField("Tenant")
+    landlord = BooleanField("Landlord")
     submit = SubmitField("Submit")
 class SettingsForm(FlaskForm):
     password = PasswordField("PASSWORD")

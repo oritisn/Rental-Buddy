@@ -29,10 +29,12 @@
       <div>
       {{form.email.label}}
                   {{form.email(size=20)}}
-      </div>
-<br>
+      </div><br>
         <div>{{form.security_number.label}}
-            {{form.security_number(size=20)}}</div><br>
+            {{form.security_number(size=20)}}</div>
+          <div>{{form.tenant.label}}{{form.tenant(size=20)}}
+          {{form.landlord.label}}{{form.landlord(size=20)}}<br></div>
+          <br>
       <div> {{form.submit(size=20)}}
       </div>
           {% with messages = get_flashed_messages() %}
