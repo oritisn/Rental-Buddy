@@ -35,8 +35,7 @@ def check():
 @app.route('/User/Login', methods=['GET', 'POST'])
 def login_page():
     login_form = LoginForm()
-    register_form = UserForm()
-    if login_form.validate_on_submit() and login_form.login.data:
+    if login_form.validate_on_submit():
         print("Log in form validated")
         user = db.session.query(User).filter(User.username == login_form.username.data).first()
         print(f'login{user}')
@@ -54,57 +53,7 @@ def login_page():
             return redirect(url_for("check"))
         else:
             print("not a user")
-    if register_form.validate_on_submit():
-        print("Register Form Validated")
-        uniques = ("username", "email")
-        uniquecheck = []
-        for column in uniques:
-            uniquecheck.append(checkUniqueness(column, register_form))
-            print(f'uniquecheck: {uniquecheck}')
-        if all(uniquecheck):
-            print("Unique checking passed")
-            toAddUser = User(
-                username=register_form.username.data,
-                password=register_form.password.data,
-                # first_name=register_form.first_name.data,
-                # last_name=register_form.last_name.data,
-                email=register_form.email.data,
-            )
-            # Dont need to define date_added, its default is current time, leave it to use that
-
-            with open('textoutput.txt', 'a') as f:
-                f.write(str(toAddUser))
-
-            db.session.add(toAddUser)
-            del toAddUser
-            print("Committing")
-            try:
-                db.session.commit()
-            except sqlalchemy.exc.IntegrityError as err:
-                with open('textoutput.txt', 'a') as f:
-                    f.write(f'\n\n\n Integrity error >{err} < Integrity error')
-            except sqlalchemy.exc.InvalidRequestError as err:
-                with open('textoutput.txt', 'a') as f:
-                    f.write(f'\n\n\n Invalid Request Error >{err} < Invalid Request Error')
-            try:
-                with open('textoutput.txt', 'a') as f:
-                    f.write(f'\n\n\nuser.query.all{User.query.all()}')
-            except sqlalchemy.exc.PendingRollbackError as err:
-                with open('textoutput.txt', 'a') as f:
-                    f.write(f'\n\n\nPending Rollback Error > {err} < Pending Rollback Error')
-                db.session.rollback()
-
-            return render_template('login.html', login_form=login_form, register_form=register_form)
-    elif len(register_form.errors) == 0:
-        print("not errors")
-        # return render_template('login.html', login_form=login_form, register_form=register_form)
-    else:
-        print(register_form.register.data)
-    with open('textoutput.txt', 'a') as f:
-        f.write(f'else form.submit.errs{str(register_form.errors)}' + "\n")
-    print("test")
-    print(login_form.errors)
-    return render_template('login.html', login_form=login_form, register_form=register_form)
+    return render_template('login.html',form=login_form)
 
 
 def checkUniqueness(column, form):
