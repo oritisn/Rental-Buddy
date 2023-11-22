@@ -5,7 +5,11 @@
 <form method="post">{{form.hidden_tag()}}
   {{form.submit(size=20)}}</form>
 
+<form method="post">
+  <a href="{{url_for('landlord')}}">Landlord</a>
+  <a href="{{url_for('tenant')}}">Tenant</a>
 
+</form>
 {% else %}
   Not logged in
 {% endif %}

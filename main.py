@@ -1,7 +1,7 @@
 import sqlalchemy.exc
 
 from flask import render_template, request, redirect, url_for
-from flask_login import login_user, current_user, logout_user
+from flask_login import login_user, current_user, logout_user, login_required
 from forms import UserForm, LoginForm, LogoutForm
 from flask_wtf.csrf import CSRFError
 
@@ -169,19 +169,16 @@ def index():
     return render_template('index.html', methods=['GET'])
 
 
-@app.route('/About')
-def about():
-    return render_template('about.html', methods=['GET'])
+@login_required
+@app.route("/Landlord")
+def landlord():
+    return render_template('Landlord.html')
 
 
-@app.route('/Blog')
-def blog():
-    return render_template('Blog.html')
-
-
-@app.route('/Contact')
-def contact():
-    return render_template('Contact.html')
+@login_required
+@app.route("/Tenant")
+def tenant():
+    return render_template('Tenant.html')
 
 
 if __name__ == '__main__':
