@@ -1,3 +1,4 @@
+import flask_login
 import sqlalchemy.exc
 
 from flask import render_template, request, redirect, url_for
@@ -175,8 +176,8 @@ def landlord():
     return render_template('Landlord.html')
 
 
-@login_required
 @app.route("/Tenant")
+@login_required
 def tenant():
     return render_template('Tenant.html')
 
