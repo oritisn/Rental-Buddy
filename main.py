@@ -3,7 +3,7 @@ import sqlalchemy.exc
 
 from flask import render_template, request, redirect, url_for
 from flask_login import login_user, current_user, logout_user, login_required
-from forms import UserForm, LoginForm, LogoutForm
+from forms import UserForm, LoginForm, LogoutForm, PortalForm
 from flask_wtf.csrf import CSRFError
 
 from app import app, db, lm
@@ -26,12 +26,13 @@ def user_loader(id):
 
 @app.route('/User/Check', methods=['GET', 'POST'])
 def check():
-    form = LogoutForm()
-    if form.validate_on_submit():
+    logout_form = LogoutForm()
+    portal_form = PortalForm()
+    if logout_form.validate_on_submit():
         logout_user()
         print("logout")
-        redirect(url_for("check"))
-    return render_template("check.html", form=form)
+        return redirect(url_for("login_page"))
+    return render_template("check.html", logout_form=logout_form,portal_form=portal_form)
 
 
 @app.route('/User/Login', methods=['GET', 'POST'])

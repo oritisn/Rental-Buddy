@@ -1,0 +1,617 @@
+.image4Icon {
+  position: absolute;
+  top: 85px;
+  left: 0;
+  width: 1500px;
+  height: 1000px;
+  object-fit: cover;
+}
+.executiveTeam,
+.freeResources,
+.strategy {
+  position: absolute;
+  top: 10px;
+  left: 119px;
+  text-transform: lowercase;
+}
+.freeResources,
+.strategy {
+  left: 309px;
+}
+.freeResources {
+  left: 440px;
+}
+.register {
+  position: relative;
+  text-transform: capitalize;
+}
+.registerWrapper {
+  position: absolute;
+  top: 0;
+  left: 740px;
+  border-radius: var(--br-3xs);
+  background-color: var(--color-tomato);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 14px 28px;
+  color: var(--white);
+}
+.home {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  text-transform: lowercase;
+  font-weight: 600;
+}
+.groupChild {
+  top: 28.5px;
+  width: 67px;
+  height: 3.5px;
+}
+.groupChild,
+.homeParent,
+.more {
+  position: absolute;
+  left: 0;
+}
+.homeParent {
+  top: 10px;
+  width: 67px;
+  height: 32px;
+  color: var(--color-tomato);
+}
+.more {
+  top: 0;
+  text-transform: lowercase;
+}
+.vectorIcon {
+  position: absolute;
+  height: 19.09%;
+  width: 10.16%;
+  top: 6.82%;
+  right: -0.83%;
+  bottom: 74.09%;
+  left: 90.67%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.moreParent {
+  position: absolute;
+  top: 10px;
+  left: 623px;
+  width: 96.5px;
+  height: 22px;
+}
+.executiveTeamParent {
+  position: absolute;
+  top: 9px;
+  left: 538px;
+  width: 870px;
+  height: 50px;
+  text-align: left;
+  font-family: var(--font-inter);
+}
+.image3Icon {
+  position: absolute;
+  top: 0;
+  left: 76px;
+  border-radius: 250px;
+  width: 211px;
+  height: 69px;
+  object-fit: cover;
+}
+.interactiveLeaseAgreement {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 1011px;
+}
+.since2023 {
+  position: absolute;
+  top: 186px;
+  left: 425px;
+  font-size: var(--font-size-11xl);
+}
+.groupItem,
+.interactiveLeaseAgreementFoParent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1011px;
+  height: 231px;
+}
+.groupItem {
+  top: 12px;
+  border-radius: var(--br-3xs);
+  background-color: #f2d942;
+  filter: blur(40px);
+  width: 265px;
+  height: 58px;
+}
+.learnMoreAboutLeaseAgreemeWrapper,
+.signUpForFreeWrapper {
+  position: absolute;
+  top: 0;
+  border-radius: var(--br-3xs);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-lgi) var(--padding-21xl);
+}
+.signUpForFreeWrapper {
+  left: 20px;
+  background-color: var(--color-tomato);
+}
+.learnMoreAboutLeaseAgreemeWrapper {
+  left: 305px;
+  border: 1px solid var(--white);
+}
+.frameParent {
+  position: absolute;
+  top: 281px;
+  left: 191px;
+  width: 712px;
+  height: 70px;
+  text-align: left;
+  font-size: var(--font-size-lg);
+  font-family: var(--font-inter);
+}
+.groupParent {
+  position: absolute;
+  top: 354px;
+  left: 229px;
+  width: 1011px;
+  height: 351px;
+  font-size: 55px;
+  color: var(--white);
+}
+.about {
+  position: absolute;
+  top: 0;
+  left: 51px;
+}
+.rentalBuddiesPartnerships {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  font-size: var(--font-size-16xl);
+  color: var(--color-darkslategray);
+}
+.aboutParent,
+.groupInner {
+  position: absolute;
+  top: 22px;
+  left: 21px;
+  width: 20px;
+  height: 3px;
+}
+.aboutParent {
+  top: 0;
+  left: 0;
+  width: 509px;
+  height: 98px;
+}
+.ourWebsiteIs {
+  position: absolute;
+  top: 118px;
+  left: 13px;
+  font-size: var(--font-size-xl);
+  line-height: 35px;
+  font-family: var(--font-inter);
+  color: var(--color-darkslategray);
+  text-align: left;
+  display: inline-block;
+  width: 647px;
+}
+.groupContainer,
+.homePageInner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 660px;
+  height: 363px;
+}
+.homePageInner {
+  top: 1321px;
+  left: 62px;
+  font-size: var(--font-size-11xl);
+  color: var(--color-tomato);
+}
+.featuredIn {
+  position: absolute;
+  top: 0;
+  left: 662px;
+}
+.dividerIcon {
+  align-self: stretch;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  height: 1px;
+  flex-shrink: 0;
+}
+.clientLogoIcon,
+.clientLogoIcon1,
+.clientLogoIcon2 {
+  position: relative;
+  width: 90px;
+  height: 28px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.clientLogoIcon1,
+.clientLogoIcon2 {
+  width: 86px;
+  height: 24px;
+}
+.clientLogoIcon2 {
+  width: 84px;
+  height: 28px;
+  display: none;
+}
+.clientLogoIcon3,
+.clientLogoIcon4,
+.clientLogoIcon5 {
+  position: relative;
+  height: 26px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.clientLogoIcon3 {
+  width: 122px;
+  display: none;
+}
+.clientLogoIcon4,
+.clientLogoIcon5 {
+  width: 112px;
+}
+.clientLogoIcon5 {
+  width: 80px;
+  height: 24px;
+  display: none;
+}
+.logos {
+  align-self: stretch;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-base) 0;
+  gap: var(--gap-45xl);
+}
+.container,
+.logoClouds01 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container {
+  width: 1216px;
+  overflow: hidden;
+  justify-content: flex-start;
+  gap: var(--gap-5xl);
+}
+.logoClouds01 {
+  position: absolute;
+  top: 79px;
+  left: 0;
+  background-color: var(--white);
+  width: 1512px;
+  justify-content: center;
+  padding: var(--padding-base) var(--padding-93xl);
+  box-sizing: border-box;
+}
+.image7Icon {
+  position: absolute;
+  top: 139px;
+  left: 1009px;
+  width: 102px;
+  height: 25px;
+  object-fit: cover;
+}
+.groupWrapper,
+.homePageChild {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1512px;
+  height: 221px;
+}
+.homePageChild {
+  top: 2002px;
+  left: -53px;
+  font-size: var(--font-size-16xl);
+}
+.contact {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: var(--font-size-6xl);
+  text-transform: capitalize;
+  color: var(--white);
+}
+.fill1Icon,
+.fill4Icon {
+  position: absolute;
+  height: 55.83%;
+  width: 6.13%;
+  top: 35.42%;
+  right: 93.87%;
+  bottom: 8.75%;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.fill4Icon {
+  height: 47.5%;
+  width: 5.86%;
+  top: 8.75%;
+  right: 94.14%;
+  bottom: 43.75%;
+}
+.leaseagreementsrentalbuddies {
+  position: absolute;
+  top: 0;
+  left: 36.4px;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+.fill1Parent,
+.fill4Parent,
+.groupIcon {
+  position: absolute;
+  height: 100%;
+  width: 99.83%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0.17%;
+}
+.fill1Parent,
+.groupIcon {
+  height: 9.45%;
+  width: 100%;
+  top: 55.91%;
+  bottom: 34.65%;
+  left: 0;
+}
+.groupIcon {
+  height: 91.67%;
+  width: 10.78%;
+  top: 4.17%;
+  right: 89.22%;
+  bottom: 4.17%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.ext101 {
+  position: absolute;
+  top: 0;
+  left: 37px;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+.groupParent1 {
+  position: absolute;
+  height: 9.45%;
+  width: 56.82%;
+  top: 28.74%;
+  right: 43.18%;
+  bottom: 61.81%;
+  left: 0;
+}
+.ellipse743Icon,
+.path34175Icon {
+  position: absolute;
+  height: 55.63%;
+  width: 7.48%;
+  top: 17.29%;
+  right: 92.52%;
+  bottom: 27.08%;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.ellipse743Icon {
+  height: 6.46%;
+  width: 5.34%;
+  top: 76.25%;
+  right: 93.61%;
+  bottom: 17.29%;
+  left: 1.05%;
+}
+.westBroadwaySuite {
+  position: absolute;
+  top: 0;
+  left: 37px;
+  text-transform: capitalize;
+  font-weight: 500;
+  display: inline-block;
+  width: 257px;
+}
+.path34175Parent {
+  position: absolute;
+  height: 18.9%;
+  width: 81.89%;
+  top: 81.1%;
+  right: 18.11%;
+  bottom: 0;
+  left: 0;
+}
+.contactParent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 359px;
+  height: 254px;
+  font-size: var(--font-size-base);
+  color: var(--color-gray-100);
+}
+.disclosures,
+.links,
+.termsAndConditions {
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-transform: capitalize;
+}
+.disclosures,
+.termsAndConditions {
+  top: 37px;
+}
+.termsAndConditions {
+  top: 74px;
+}
+.privacyPolicy {
+  top: 111px;
+  text-transform: capitalize;
+}
+.faqsParent,
+.liveChat,
+.privacyPolicy {
+  position: absolute;
+  left: 0;
+}
+.liveChat {
+  top: 151px;
+  text-transform: capitalize;
+}
+.faqsParent {
+  top: 53px;
+  width: 198px;
+  height: 178px;
+  font-size: var(--font-size-lg);
+  color: var(--color-gray-200);
+}
+.linksParent,
+.welcomeToRental {
+  position: absolute;
+  top: 0;
+  left: 404px;
+  width: 198px;
+  height: 231px;
+}
+.welcomeToRental {
+  top: 42px;
+  left: 0;
+  font-size: var(--font-size-xl);
+  line-height: 35px;
+  font-family: var(--font-inter);
+  color: var(--color-gray-200);
+  display: inline-block;
+  width: 606px;
+  height: 313px;
+}
+.groupDiv,
+.rentalBuddyParent {
+  position: absolute;
+  top: 0;
+  left: 726px;
+  width: 606px;
+  height: 355px;
+}
+.groupDiv {
+  top: 70px;
+  left: 123px;
+  width: 1332px;
+}
+.rentalBuddies {
+  position: absolute;
+  top: 18px;
+  left: 181px;
+  text-transform: capitalize;
+}
+.atlasLimitedPartnershipsWhi {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 172px;
+  height: 45px;
+  object-fit: cover;
+}
+.frameDiv,
+.rentalBuddiesAllRightResParent {
+  position: absolute;
+  top: 402px;
+  left: 496px;
+  width: 502px;
+  height: 45px;
+  font-size: var(--font-size-lg);
+}
+.frameDiv {
+  top: 3392px;
+  left: -25px;
+  background-color: #ffa543;
+  width: 1512px;
+  height: 500px;
+  text-align: left;
+  font-size: var(--font-size-6xl);
+  color: var(--white);
+}
+.vectorIcon1 {
+  position: absolute;
+  top: 1285px;
+  left: 878px;
+  width: 505px;
+  height: 523px;
+}
+.icon {
+  object-fit: cover;
+}
+.homePageInner1,
+.icon,
+.wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 600px;
+}
+.homePageInner1 {
+  top: 1285px;
+  left: 828px;
+}
+.image2Icon,
+.image5Icon,
+.image6Icon {
+  position: absolute;
+  top: 2137px;
+  left: 643px;
+  width: 81px;
+  height: 34px;
+  object-fit: cover;
+}
+.image2Icon,
+.image6Icon {
+  top: 2142px;
+  left: 817px;
+  width: 68px;
+  height: 19px;
+}
+.image2Icon {
+  top: 2322px;
+  left: 169px;
+  width: 1148px;
+  height: 533px;
+  mix-blend-mode: multiply;
+}
+.homePage {
+  position: relative;
+  background-color: var(--white);
+  width: 100%;
+  height: 3971px;
+  overflow: hidden;
+  text-align: center;
+  font-size: var(--font-size-lg);
+  color: var(--color-darkslategray);
+  font-family: var(--font-poppins);
+}
