@@ -22,5 +22,5 @@ app.config['SESSION_COOKIE_SECURE'] = False  # Localhosting uses http not https
 app.config['DEBUG'] = True
 lm = LoginManager()
 lm.init_app(app)
-lm.login_view = "User/Add"
+lm.login_view = "/"
 app.config["REMEMBER_COOKIE_DURATION"] = timedelta(seconds=30)
