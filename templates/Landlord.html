@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>landlord test page</title>
+</head>
+<body>
+landlord
+{% if current_user.is_authenticated %}
+    logged in as {{current_user.username}}
+{% endif %}
+</body>
+</html>
