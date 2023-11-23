@@ -14,10 +14,6 @@ class LoginForm(FlaskForm):
 class LogoutForm(FlaskForm):
     submit = SubmitField("Log Out")
 
-class PortalForm(FlaskForm):
-    landlord = SubmitField("Landlord")
-    tenant = SubmitField("Tenant")
-
 
 class UserForm(FlaskForm):
     username = StringField("Username", validators=[InputRequired()])                    #UNIQUE

@@ -2,15 +2,10 @@
 <html lang="en">
 {% if current_user.is_authenticated %}
   Hi {{ current_user.username }}!
-<form method="post">{{logout_form.hidden_tag()}}
-  {{logout_form.submit(size=20)}}</form>
+<form method="post">{{form.hidden_tag()}}
+  {{form.submit(size=20)}}</form>
 
-<form method="post">
-  {{portal_form.hidden_tag()}}
-  {{portal_form.landlord(size=20)}}
-  {{portal_form.tenant(size=20)}}
 
-</form>
 {% else %}
   Not logged in
 {% endif %}
