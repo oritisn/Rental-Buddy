@@ -145,7 +145,9 @@ def add_user():
             return redirect("/User/Check", code=301)
         else:
             form = UserForm()
-            return render_template("add_user.html", form=form, errors=validatedform)
+            response = render_template("add_user.html", form=form, errors=validatedform)
+            response.headers["Cache-Control"] = "no-cache,no-store,must-revalidate"
+            return response
 
 
 
