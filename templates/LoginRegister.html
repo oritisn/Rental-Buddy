@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv= "x-ua-compatible" content = "width=device-width,
     intial-scale=1.02">
-    <title>website with Login & Registration | naima3910</title>
+    <title>Rental Buddy</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -14,11 +14,8 @@
     <header>
         <h2 class="Rental Buddy">Rental Buddy<h2>
             <nav class="navigation">
-                <a href="#">Home</a>
-                <a href="#">Contact</a>
-                <a href="#">FAQS</a>
-                <a href="#">Sign up for free</a>
-                <button class="btnLogin-popup">login</button>  
+                <a href="{{url_for('index')}}">Home</a>
+                <button class="btnLogin-popup">Login</button>
               </nav>
             </header>
         
@@ -29,26 +26,30 @@
         
                 <div class="form-box login">
                     <h2>Login</h2>
-                    <form action="#">
+                    <form method="post">
+            {{login_form.hidden_tag()}}
+                        <div class="input-box">
+                            {{login_form.username(size=20)}}
+                            {{login_form.username.label}}
+                        </div>
                         <div class="input-box">
                             <span class="icon">
                                 <ion-icon name="mail"></ion-icon>
                             </span>
-                            <input type="email" required>
-                            <label>Email</label>
+                            {{login_form.email(size=20)}}
+                            {{login_form.email.label}}
                         </div>
                         <div class="input-box">
                             <span class="icon">
                                 <ion-icon name="lock-closed"></ion-icon>
                             </span>
-                            <input type="password" required>
-                            <label>Password</label>
+                            {{login_form.password(size=50)}}
+                            {{login_form.password.label}}
                         </div>
                         <div class="remember-forgot">
-                            <label><input type="checkbox"> Remember me</label>
-                            <a href="#">Forgot Password?</a>
+                            {{login_form.remember.label}}{{login_form.remember(size=1)}}
                         </div>
-                        <button type="submit" class="btn">Login</button>
+                        {{login_form.submit(class="btn")}}
                         <div class="login-register">
                             <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
                         </div>
@@ -57,35 +58,53 @@
         
                 <div class="form-box register">
                     <h2>Registration</h2>
-                    <form action="#">
+                    <form method="post">
+                                    {{register_form.hidden_tag()}}
+
                         <div class="input-box">
                             <span class="icon">
                                 <ion-icon name="person"></ion-icon>
                             </span>
-                            <input type="text" required>
-                            <label>Username</label>
+                                {{register_form.username(size=20)}}
+                                {{register_form.username.label}}
                         </div>
                         <div class="input-box">
                             <span class="icon">
                                 <ion-icon name="mail"></ion-icon>
                             </span>
-                            <input type="email" required>
-                            <label>Email</label>
+                            {{register_form.email(size=20)}}
+                            {{register_form.email.label}}
                         </div>
                         <div class="input-box">
                             <span class="icon">
                                 <ion-icon name="lock-closed"></ion-icon>
                             </span>
-                            <input type="password" required>
-                            <label>Password</label>
+                            {{register_form.password(size=20)}}
+                            {{register_form.password.label}}
+                        </div>
+                        <div class="input-box">
+                            <span class="icon">
+                                <ion-icon name="lock-closed"></ion-icon>
+                            </span>
+                            {{register_form.confirm_password(size=20)}}
+                            {{register_form.confirm_password.label}}
                         </div>
                         <div class="remember-forgot">
                             <label><input type="checkbox"> I agree to the terms & conditions</label>
                         </div>
-                        <button type="submit" class="btn">Register</button>
+                        <div>{{register_form.tenant.label}}{{register_form.tenant(size=20)}}
+                             {{register_form.landlord.label}}{{register_form.landlord(size=20)}}<br></div>
+                        {{register_form.submit(class="btn")}}
                         <div class="login-register">
                             <p>Already have an account? <a href="#" class="login-link">Login</a></p>
                         </div>
+                          {% if messages %}
+                          <ul>
+                          {% for message in messages %}
+                            {{ message }}
+                          {% endfor %}
+                          </ul>
+                         {% endif %}
                     </form>
                 </div>
             </div>

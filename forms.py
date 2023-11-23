@@ -7,8 +7,7 @@ from wtforms.validators import InputRequired, Email, Length
 class LoginForm(FlaskForm):
     username = StringField("Username ", validators=[InputRequired()])
     password = PasswordField("Password ", validators=[InputRequired()])
-    email = EmailField("Email", validators=[InputRequired(), Email()])#
-    security_number = StringField("Security Number",validators=[InputRequired()])
+    email = EmailField("Email", validators=[InputRequired(), Email()])
     remember = BooleanField("Remember me")
     submit = SubmitField("Log In")
 class LogoutForm(FlaskForm):
@@ -19,15 +18,14 @@ class PortalForm(FlaskForm):
     tenant = SubmitField("Tenant")
 
 
-class UserForm(FlaskForm):
+class RegisterForm(FlaskForm):
     username = StringField("Username", validators=[InputRequired()])                    #UNIQUE
     password = PasswordField("Password", validators=[InputRequired(),Length(min=3,message="Password too short")])
     confirm_password = PasswordField("Confirm Password", validators=[InputRequired()])
     email = EmailField(label="Email", validators=[InputRequired(), Email()])                 #UNIQUE
-    security_number = StringField("Security Number",validators=[InputRequired()])       #UNIQUE?
     tenant = BooleanField("Tenant")
     landlord = BooleanField("Landlord")
-    submit = SubmitField("Submit")
+    submit = SubmitField("Register")
 class SettingsForm(FlaskForm):
     password = PasswordField("PASSWORD")
     category = SelectField("CATEGORY", choices=(("Teacher", "teacher"), ("Student", "Student")))

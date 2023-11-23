@@ -1,9 +1,9 @@
 import flask_login
 import sqlalchemy.exc
 
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for,flash
 from flask_login import login_user, current_user, logout_user, login_required
-from forms import UserForm, LoginForm, LogoutForm, PortalForm
+from forms import RegisterForm, LoginForm, LogoutForm, PortalForm
 from flask_wtf.csrf import CSRFError
 
 from app import app, db, lm
@@ -31,7 +31,7 @@ def check():
     if logout_form.submit.data and logout_form.validate():
         logout_user()
         print("logout")
-        return redirect(url_for("login_page"))
+        return redirect(url_for("index"))
     if portal_form.validate_on_submit():
         if request.form.get("tenant"):#If they pressed the tenant button and they are a tenant
             if db.session.query(Tenant).filter_by(user_id=current_user.get_id()).first():
@@ -50,7 +50,7 @@ def login_page():
     if login_form.validate_on_submit():
         print("Log in form validated")
         user = db.session.query(User).filter(User.username == login_form.username.data).first()
-        print(f'login{user}')
+        print(f'login:{user}')
         if user is not None:
             passwordCheck = user.check_password(login_form.password.data)
             print(f'pass{login_form.password.data} '
@@ -61,10 +61,13 @@ def login_page():
                 login_user(user, remember=remember)
                 print(f'{current_user}')
             else:
+                flash("Incorrect Password")
                 print("Failed Login")
+                return redirect()
             return redirect(url_for("check"))
         else:
             print("not a user")
+            flash("Incorrect Username")
     return render_template('login.html', form=login_form)
 
 
@@ -92,7 +95,7 @@ def validateAddUser(form):
     pass2 = form.confirm_password.data
     if pass1 != pass2:
         failures.append("Passwords don't match")
-    columns = ("username", "email", "security_number")
+    columns = ("username", "email")
     for column in columns:
         if not checkUniqueness(column, form):
             failures.append(f'{column} is not unique ')
@@ -101,8 +104,7 @@ def validateAddUser(form):
 
 @app.route('/User/Add', methods=['GET', 'POST'])
 def add_user():
-    form = UserForm()
-    print(form.validate_on_submit())
+    form = RegisterForm()
     """
     Form validate on submit:
         checks the validators attached to the form
@@ -117,9 +119,7 @@ def add_user():
             toAddUser = User(
                 username=form.username.data,
                 password=form.password.data,
-                email=form.email.data,
-                security_number=form.security_number.data
-            )
+                email=form.email.data)
             # Dont need to define date_added, its default is current time, leave it to use that
             with open('textoutput.txt', 'a') as f:
                 f.write(str(toAddUser))
@@ -155,7 +155,7 @@ def add_user():
             del toAddUser
             return redirect("/User/Check", code=301)
         else:
-            form = UserForm()
+            form = RegisterForm()
             response = render_template("add_user.html", form=form, errors=validatedform)
             response.headers["Cache-Control"] = "no-cache,no-store,must-revalidate"
             return response
@@ -177,9 +177,85 @@ def add_user():
 #         pass
 #     return render_template('settings.html', form=form)
 #     pass
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET','POST'])
 def index():
-    return render_template('index.html', methods=['GET'])
+    login_form=LoginForm()
+    register_form=RegisterForm()
+    print("evaluating forms")
+    if register_form.submit.data:
+        if register_form.validate():
+            validatedform = validateAddUser(register_form)
+            if not validatedform:  # Including ones that have to be checked
+                # server side such as uniqueness
+                toAddUser = User(
+                    username=register_form.username.data,
+                    password=register_form.password.data,
+                    email=register_form.email.data,
+                )
+                # Dont need to define date_added, its default is current time, leave it to use that
+                with open('textoutput.txt', 'a') as f:
+                    f.write(str(toAddUser))
+
+                db.session.add(toAddUser)
+
+                print("Committing")
+                try:
+                    db.session.commit()
+                except sqlalchemy.exc.IntegrityError as err:
+                    with open('textoutput.txt', 'a') as f:
+                        f.write(f'\n\n\n Integrity error >{err} < Integrity error')
+                except sqlalchemy.exc.InvalidRequestError as err:
+                    with open('textoutput.txt', 'a') as f:
+                        f.write(f'\n\n\n Invalid Request Error >{err} < Invalid Request Error')
+                try:
+                    with open('textoutput.txt', 'a') as f:
+                        f.write(f'\n\n\nuser.query.all{User.query.all()}')
+                except sqlalchemy.exc.PendingRollbackError as err:
+                    with open('textoutput.txt', 'a') as f:
+                        f.write(f'\n\n\nPending Rollback Error > {err} < Pending Rollback Error')
+                    db.session.rollback()
+                login_user(toAddUser)
+                # Add user to appropriate subclass of user
+                if register_form.landlord.data:
+                    landlordToAdd = Landlord(user_id=toAddUser.id)
+                    db.session.add(landlordToAdd)
+                if register_form.tenant.data:
+                    tenantToAdd = Tenant(user_id=toAddUser.id)
+                    db.session.add(tenantToAdd)
+                db.session.commit()
+
+                del toAddUser
+                return redirect("/User/Check", code=301)
+            # else:
+            #     form = RegisterForm()
+            #     response = render_template("add_user.html", form=form, errors=validatedform)
+            #     response.headers["Cache-Control"] = "no-cache,no-store,must-revalidate"
+            #     return response
+        else:print("not valid")
+    else:print("not submit")
+    if login_form.submit.data and login_form.validate():
+        print("Log in form validated")
+        user = db.session.query(User).filter(User.username == login_form.username.data).first()
+        print(f'login:{user}')
+        if user is not None:
+            passwordCheck = user.check_password(login_form.password.data)
+            print(f'pass{login_form.password.data} '
+                  f'checkpass{passwordCheck}')
+            if passwordCheck is True:
+                print(f'remember: {login_form.remember.data}')
+                remember = login_form.remember.data
+                login_user(user, remember=remember)
+                print(f'{current_user}')
+            else:
+                flash("Incorrect Password")
+                print("Failed Login")
+                return redirect()
+            return redirect(url_for("check"))
+        else:
+            print("not a user")
+            flash("Incorrect Username")
+    else:print("not login")
+    return render_template('loginregister.html', methods=['GET'],login_form=login_form,register_form=register_form)
 
 
 @login_required
@@ -192,7 +268,9 @@ def landlord():
 @login_required
 def tenant():
     return render_template('Tenant.html')
-
+@app.route("/Testing")
+def testing():
+    return render_template("LoginRegister.html")
 
 if __name__ == '__main__':
     app.run()

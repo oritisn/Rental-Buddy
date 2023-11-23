@@ -58,7 +58,6 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(200), nullable=False, unique=True)
     password = db.Column(db.String(200), nullable=False)
     email = db.Column(db.String(200), nullable=False, unique=True)
-    security_number = db.Column(db.String(200), nullable=False, unique=True)
     date_added = db.Column(db.DateTime, default=datetime.utcnow())
 
     def set_password(self, password):
@@ -73,18 +72,15 @@ class User(UserMixin, db.Model):
         """Check hashed password."""
         return check_password_hash(self.password, password)
 
-    def __init__(self, username, password, email, security_number):
+    def __init__(self, username, password, email):
         self.username = username
         self.password = self.set_password(password)
         self.email = email
-        self.security_number = security_number
 
     def __repr__(self):
         return f'User: {self.username}' \
                f'email: {self.email}' \
-               f'date added: {self.date_added}' \
-               f'security number: {self.security_number}'
-
+               f'date added: {self.date_added}'
 
 class Tenant(db.Model):
     tenant_id = db.Column(db.Integer, primary_key=True)
