@@ -1,8 +1,9 @@
+import flask_login
 import sqlalchemy.exc
 
 from flask import render_template, request, redirect, url_for
-from flask_login import login_user, current_user, logout_user
-from forms import UserForm, LoginForm, LogoutForm
+from flask_login import login_user, current_user, logout_user, login_required
+from forms import UserForm, LoginForm, LogoutForm, PortalForm
 from flask_wtf.csrf import CSRFError
 
 from app import app, db, lm
@@ -25,12 +26,22 @@ def user_loader(id):
 
 @app.route('/User/Check', methods=['GET', 'POST'])
 def check():
-    form = LogoutForm()
-    if form.validate_on_submit():
+    logout_form = LogoutForm()
+    portal_form = PortalForm()
+    if logout_form.submit.data and logout_form.validate():
         logout_user()
         print("logout")
-        redirect(url_for("check"))
-    return render_template("check.html", form=form)
+        return redirect(url_for("login_page"))
+    if portal_form.validate_on_submit():
+        if request.form.get("tenant"):#If they pressed the tenant button and they are a tenant
+            if db.session.query(Tenant).filter_by(user_id=current_user.get_id()).first():
+                return redirect(url_for("tenant"))
+            else:print("Not a tenant")
+        if request.form.get("landlord"):
+            if db.session.query(Landlord).filter_by(user_id=current_user.get_id()).first():
+                return redirect(url_for("landlord"))
+            else:print("Not a landlord")
+    return render_template("check.html", logout_form=logout_form,portal_form=portal_form)
 
 
 @app.route('/User/Login', methods=['GET', 'POST'])
@@ -171,19 +182,16 @@ def index():
     return render_template('index.html', methods=['GET'])
 
 
-@app.route('/About')
-def about():
-    return render_template('about.html', methods=['GET'])
+@login_required
+@app.route("/Landlord")
+def landlord():
+    return render_template('Landlord.html')
 
 
-@app.route('/Blog')
-def blog():
-    return render_template('Blog.html')
-
-
-@app.route('/Contact')
-def contact():
-    return render_template('Contact.html')
+@app.route("/Tenant")
+@login_required
+def tenant():
+    return render_template('Tenant.html')
 
 
 if __name__ == '__main__':
