@@ -18,3 +18,4 @@ if __name__ == '__main__':
     for col in db_cols_list:
         print("\n\n\n"+col+"\n")
         print(pd.read_sql(sql=f"SELECT * FROM {col}",con=engine))
+        print(pd.read_sql(sql=f'SELECT username,email,password FROM User',con=engine))

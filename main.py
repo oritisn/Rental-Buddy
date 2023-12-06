@@ -261,7 +261,7 @@ def index():
             else:
                 flash("Incorrect Password")
                 print("Failed Login")
-                return redirect()
+                return redirect(url_for("index"))
             return redirect(url_for("check"))
         else:
             print("not a user")
