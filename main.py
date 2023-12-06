@@ -1,12 +1,15 @@
+import os
+
 import flask_login
 import sqlalchemy.exc
 
-from flask import render_template, request, redirect, url_for,flash
+from flask import render_template, request, redirect, url_for, flash, send_from_directory
+from flask_uploads import UploadSet, configure_uploads, UploadNotAllowed
 from flask_login import login_user, current_user, logout_user, login_required
-from forms import RegisterForm, LoginForm, LogoutForm, PortalForm
+from forms import RegisterForm, LoginForm, LogoutForm, PortalForm,LeaseUploadForm
 from flask_wtf.csrf import CSRFError
 
-from app import app, db, lm
+from app import app, db, lm, basedir
 # import models #import after importing app and db always
 
 from models import User, Tenant, Landlord
@@ -33,15 +36,17 @@ def check():
         print("logout")
         return redirect(url_for("index"))
     if portal_form.validate_on_submit():
-        if request.form.get("tenant"):#If they pressed the tenant button and they are a tenant
+        if request.form.get("tenant"):  # If they pressed the tenant button and they are a tenant
             if db.session.query(Tenant).filter_by(user_id=current_user.get_id()).first():
                 return redirect(url_for("tenant"))
-            else:print("Not a tenant")
+            else:
+                print("Not a tenant")
         if request.form.get("landlord"):
             if db.session.query(Landlord).filter_by(user_id=current_user.get_id()).first():
                 return redirect(url_for("landlord"))
-            else:print("Not a landlord")
-    return render_template("check.html", logout_form=logout_form,portal_form=portal_form)
+            else:
+                print("Not a landlord")
+    return render_template("check.html", logout_form=logout_form, portal_form=portal_form)
 
 
 @app.route('/User/Login', methods=['GET', 'POST'])
@@ -177,10 +182,10 @@ def add_user():
 #         pass
 #     return render_template('settings.html', form=form)
 #     pass
-@app.route('/', methods=['GET','POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    login_form=LoginForm()
-    register_form=RegisterForm()
+    login_form = LoginForm()
+    register_form = RegisterForm()
     print("evaluating forms")
     if register_form.submit.data:
         if register_form.validate():
@@ -231,8 +236,10 @@ def index():
             #     response = render_template("add_user.html", form=form, errors=validatedform)
             #     response.headers["Cache-Control"] = "no-cache,no-store,must-revalidate"
             #     return response
-        else:print("not valid")
-    else:print("not submit")
+        else:
+            print("not valid")
+    else:
+        print("not submit")
     if login_form.submit.data and login_form.validate():
         print("Log in form validated")
         user = db.session.query(User).filter(User.username == login_form.username.data).first()
@@ -254,8 +261,9 @@ def index():
         else:
             print("not a user")
             flash("Incorrect Username")
-    else:print("not login")
-    return render_template('loginregister.html', methods=['GET'],login_form=login_form,register_form=register_form)
+    else:
+        print("not login")
+    return render_template('loginregister.html', methods=['GET'], login_form=login_form, register_form=register_form)
 
 
 @login_required
@@ -268,9 +276,34 @@ def landlord():
 @login_required
 def tenant():
     return render_template('Tenant.html')
+
+
 @app.route("/Testing")
 def testing():
     return render_template("LoginRegister.html")
+
+"""https://pythonhosted.org/Flask-Uploads/"""
+leases = UploadSet('leases', extensions=('txt', 'pdf'))
+UPLOAD_FOLDER = os.path.join(basedir, 'Upload')
+app.config['UPLOADED_LEASES_DEST'] = UPLOAD_FOLDER
+configure_uploads(app, leases)
+
+
+@app.route('/Upload', methods=['GET', 'POST'])
+def upload_lease():
+    if request.method == 'POST' and 'lease' in request.files:
+        print("Upload Block")
+        try:
+            leasename = leases.save(request.files['lease'])
+        except UploadNotAllowed:
+            return render_template("upload.html", errors=f"Wrong file format. Currently only supporting .txt and .pdf")
+        print(leasename)
+        ext = os.path.splitext(leasename)[1]
+        print(ext)
+        print(os.path.abspath(leasename))
+        return send_from_directory(app.config['UPLOADED_LEASES_DEST'], leasename)
+    return render_template("upload.html")
+
 
 if __name__ == '__main__':
     app.run()

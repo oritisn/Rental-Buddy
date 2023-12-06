@@ -1,5 +1,5 @@
 from wtforms import StringField, SubmitField, IntegerField, RadioField, \
-    DateField, EmailField, PasswordField, SelectMultipleField, BooleanField, SelectField
+    DateField, EmailField, PasswordField, SelectMultipleField, BooleanField, SelectField, FileField
 from flask_wtf import FlaskForm
 from wtforms.validators import InputRequired, Email, Length
 
@@ -40,3 +40,6 @@ class SettingsForm(FlaskForm):
     course_B1 = BooleanField("B1")
     course_Grammar = BooleanField("GRAMMAR")
     submit = SubmitField("Submit")
+
+class LeaseUploadForm(FlaskForm):
+    file = FileField()

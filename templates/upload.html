@@ -1,0 +1,10 @@
+<!doctype html>
+<title>Upload new lease</title>
+<h1>Upload new lease</h1>
+{%   if errors != None  %}
+  {{errors}}
+{%   endif   %}
+<form method=post enctype=multipart/form-data>
+  <input type=file name=lease>
+  <input type=submit value=Upload>
+</form>
