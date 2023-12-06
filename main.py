@@ -13,7 +13,8 @@ from flask_wtf.csrf import CSRFError
 from app import app, db, lm, basedir
 # import models #import after importing app and db always
 
-from models import User, Tenant, Landlord
+from models import User, Tenant, Landlord,Lease
+from upload_config import leases
 
 
 # recreate_all_databases()
@@ -243,8 +244,6 @@ def index():
             #     return response
         else:
             print("not valid")
-    else:
-        print("not submit")
     if login_form.submit.data and login_form.validate():
         print("Log in form validated")
         user = db.session.query(User).filter(User.username == login_form.username.data).first()
@@ -271,10 +270,27 @@ def index():
     return render_template('loginregister.html', methods=['GET'], login_form=login_form, register_form=register_form)
 
 
-@login_required
+
 @app.route("/Landlord")
+@login_required
 def landlord():
-    return render_template('Landlord.html')
+    upform = LeaseUploadForm()
+    if upform.validate_on_submit():
+        print("Upload Block")
+        try:
+            leasename = leases.save(request.files['lease'])
+        except UploadNotAllowed:
+            return render_template("upload.html", upform=upform, types=leases.extensions,
+                                   errors=f"Wrong file format. Currently only supporting .txt and .pdf")
+        print(leasename)
+        ext = os.path.splitext(leasename)[1]
+        print(ext)
+        print(os.path.abspath(leasename))
+        print(leases.extensions)
+        print(current_user)
+
+        return send_from_directory(app.config['UPLOADED_LEASES_DEST'], leasename)
+    return render_template('Landlord.html',upform=upform,errors=None,types=leases.extensions)
 
 
 @app.route("/Tenant")
@@ -287,11 +303,7 @@ def tenant():
 def testing():
     return render_template("LoginRegister.html")
 
-"""https://pythonhosted.org/Flask-Uploads/"""
-leases = UploadSet('leases', extensions=('txt', 'pdf'))
-UPLOAD_FOLDER = os.path.join(basedir, 'Upload')
-app.config['UPLOADED_LEASES_DEST'] = UPLOAD_FOLDER
-configure_uploads(app, leases)
+
 
 @app.route('/Upload', methods=['GET', 'POST'])
 @login_required
@@ -309,6 +321,8 @@ def upload_lease():
         print(os.path.abspath(leasename))
         print(leases.extensions)
         print(current_user)
+        newlease = Lease(leasename)
+
         return send_from_directory(app.config['UPLOADED_LEASES_DEST'], leasename)
     return render_template("upload.html",upform=upform,types=leases.extensions,errors=None)
 
