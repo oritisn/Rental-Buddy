@@ -26,7 +26,9 @@ def handle_csrf_error(e):
 def user_loader(id):
     user = db.session.get(User, id)
     return user
-
+@lm.unauthorized_handler
+def unauthorized_callback():
+    return redirect(url_for('index'))
 
 @app.route('/User/Check', methods=['GET', 'POST'])
 def check():
@@ -289,7 +291,7 @@ UPLOAD_FOLDER = os.path.join(basedir, 'Upload')
 app.config['UPLOADED_LEASES_DEST'] = UPLOAD_FOLDER
 configure_uploads(app, leases)
 
-
+@login_required
 @app.route('/Upload', methods=['GET', 'POST'])
 def upload_lease():
     upform= LeaseUploadForm()
