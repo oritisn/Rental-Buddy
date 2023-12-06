@@ -5,6 +5,9 @@ import os
 import pandas as pd
 import sqlalchemy
 
+from app import db
+from models import Lease, Lease_Landlord
+
 """loads in the database using the same path as app.py"""
 basedir = os.path.abspath(os.path.dirname(__file__))
 engine = sqlalchemy.create_engine("sqlite:///" + os.path.join(basedir, 'db.sqlite'))
@@ -18,3 +21,7 @@ if __name__ == '__main__':
     for col in db_cols_list:
         print("\n\n\n"+col+"\n")
         print(pd.read_sql(sql=f"SELECT * FROM {col}",con=engine))
+    #
+    # print(Lease.query.delete())
+    # print(Lease_Landlord.query.delete)
+    # db.session.commit()

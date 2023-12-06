@@ -6,7 +6,7 @@ import sqlalchemy.exc
 from flask import render_template, request, redirect, url_for, flash, send_from_directory
 from flask_uploads import UploadSet, configure_uploads, UploadNotAllowed
 from flask_login import login_user, current_user, logout_user, login_required
-from forms import RegisterForm, LoginForm, LogoutForm, PortalForm,LeaseUploadForm
+from forms import RegisterForm, LoginForm, LogoutForm, PortalForm, LeaseUploadForm, DisplayForm
 from flask_wtf.csrf import CSRFError
 
 
@@ -271,29 +271,38 @@ def index():
 
 
 
-@app.route("/Landlord")
+@app.route("/Landlord",methods=['GET', 'POST'])
 @login_required
 def landlord():
     upform = LeaseUploadForm()
-    if upform.validate_on_submit():
+    display= DisplayForm()
+    base_temp = render_template('Landlord.html',upform=upform,errors=None,types=leases.extensions,display=display)
+    if upform.submit.data and upform.validate():
         print("Upload Block")
         try:
             leasename = leases.save(request.files['lease'])
         except UploadNotAllowed:
-            return render_template("upload.html", upform=upform, types=leases.extensions,
-                                   errors=f"Wrong file format. Currently only supporting .txt and .pdf")
+            return    render_template('Landlord.html',upform=upform,errors=f"Wrong file format. Currently only supporting .txt and .pdf",types=leases.extensions,display=display)
+
         print(leasename)
         ext = os.path.splitext(leasename)[1]
-        print(ext)
-        print(os.path.abspath(leasename))
-        print(leases.extensions)
         print(current_user)
-
+        print(current_user.id)
+        landlord = db.session.query(Landlord).filter(Landlord.user_id == current_user.id).first()
+        newlease = Lease(leasename,landlord)
+        db.session.add(newlease)
+        db.session.commit()
         return send_from_directory(app.config['UPLOADED_LEASES_DEST'], leasename)
-    return render_template('Landlord.html',upform=upform,errors=None,types=leases.extensions)
+    if display.submit2.data and display.validate():
+        print("Display clicked")
+        leases1 = db.session.query(Lease.file_name).join(Lease.landlord).filter_by(landlord_id=Landlord.landlord_id).all()
+        print(leases1)
+
+        return 1
+    return base_temp
 
 
-@app.route("/Tenant")
+@app.route("/Tenant",methods=['GET', 'POST'])
 @login_required
 def tenant():
     return render_template('Tenant.html')
