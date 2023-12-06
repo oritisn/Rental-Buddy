@@ -42,4 +42,5 @@ class SettingsForm(FlaskForm):
     submit = SubmitField("Submit")
 
 class LeaseUploadForm(FlaskForm):
-    file = FileField()
+    lease = FileField()
+    submit = SubmitField("Upload")

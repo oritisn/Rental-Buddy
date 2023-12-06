@@ -9,6 +9,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from forms import RegisterForm, LoginForm, LogoutForm, PortalForm,LeaseUploadForm
 from flask_wtf.csrf import CSRFError
 
+
 from app import app, db, lm, basedir
 # import models #import after importing app and db always
 
@@ -291,18 +292,20 @@ configure_uploads(app, leases)
 
 @app.route('/Upload', methods=['GET', 'POST'])
 def upload_lease():
-    if request.method == 'POST' and 'lease' in request.files:
+    upform= LeaseUploadForm()
+    if upform.validate_on_submit():
         print("Upload Block")
         try:
             leasename = leases.save(request.files['lease'])
         except UploadNotAllowed:
-            return render_template("upload.html", errors=f"Wrong file format. Currently only supporting .txt and .pdf")
+            return render_template("upload.html",upform=upform,types=leases.extensions,errors=f"Wrong file format. Currently only supporting .txt and .pdf")
         print(leasename)
         ext = os.path.splitext(leasename)[1]
         print(ext)
         print(os.path.abspath(leasename))
+        print(leases.extensions)
         return send_from_directory(app.config['UPLOADED_LEASES_DEST'], leasename)
-    return render_template("upload.html")
+    return render_template("upload.html",upform=upform,types=leases.extensions,errors=None)
 
 
 if __name__ == '__main__':

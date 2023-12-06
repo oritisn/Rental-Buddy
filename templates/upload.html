@@ -3,8 +3,15 @@
 <h1>Upload new lease</h1>
 {%   if errors != None  %}
   {{errors}}
+{%  else %}
+  File types allowed:{% for e in types %}
+  {{ e }}
+{% endfor %}
 {%   endif   %}
-<form method=post enctype=multipart/form-data>
-  <input type=file name=lease>
-  <input type=submit value=Upload>
-</form>
+
+<form method="post" enctype="multipart/form-data">
+
+{{upform.hidden_tag()}}
+{{upform.lease(size=20)}}
+{{upform.submit(size=20)}}
+  </form>
