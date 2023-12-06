@@ -5,53 +5,24 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from app import db
 
-
-# Category_User = db.Table('category_user',
-#                          db.Column("user_id", db.Integer, db.ForeignKey('user.id')),
-#                          db.Column("category_id", db.Integer, db.ForeignKey("category.id")))
-#
-# Course_User = db.Table('course_user',
-#                        db.Column("user_id", db.Integer, db.ForeignKey('user.id')),
-#                        db.Column("course_id", db.Integer, db.ForeignKey('course.id')))
-#
-# Class_User = db.Table("class_user",
-#                       db.Column("user_id", db.Integer, db.ForeignKey('user.id')),
-#                       db.Column("class_id", db.Integer, db.ForeignKey('class.id')))
-#
-#
-# class Course(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(200), nullable=False)
-#
-#     def __repr__(self):
-#         return f'<Courses "{self.id}   {self.name}">'
-#
-#
-#
-#
-#
-# class Category(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(200), nullable=False)
-#
-#     def __repr__(self):
-#         return f'<Category "{self.name}">'
-#
-#
-# class Class(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(200), nullable=False)
-
-Property_Tenant = db.Table("property_tenant",
-                           db.Column("property_id", db.Integer, db.ForeignKey('property.id')),
+# Property_Tenant = db.Table("property_tenant",
+#                            db.Column("property_id", db.Integer, db.ForeignKey('property.id')),
+#                            db.Column("tenant_id", db.Integer, db.ForeignKey('tenant.tenant_id'))
+#                            )
+# 
+# Property_Landlord = db.Table("property_landlord",
+#                              db.Column("property_id", db.Integer, db.ForeignKey('property.id')),
+#                              db.Column("landlord_id", db.Integer, db.ForeignKey('landlord.landlord_id'))
+#                              )
+lease_Tenant = db.Table("lease_tenant",
+                           db.Column("lease_id", db.Integer, db.ForeignKey('lease.lease_id')),
                            db.Column("tenant_id", db.Integer, db.ForeignKey('tenant.tenant_id'))
                            )
 
-Property_Landlord = db.Table("property_landlord",
-                             db.Column("property_id", db.Integer, db.ForeignKey('property.id')),
+lease_Landlord = db.Table("lease_landlord",
+                             db.Column("lease_id", db.Integer, db.ForeignKey('lease.lease_id')),
                              db.Column("landlord_id", db.Integer, db.ForeignKey('landlord.landlord_id'))
                              )
-
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -93,11 +64,16 @@ class Landlord(db.Model):
     def __init__(self,user_id):
         self.user_id=user_id
 
+class Lease(db.Model):
+    lease_id = db.Column(db.Integer,primary_key=True)
+    file_name=db.Column(db.String,nullable=False,unique=True)
+    def __init__(self,file_name):
+        self.file_name = file_name
 
-class Property(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    address = db.Column(db.String, nullable=False)
-    # add columns for other details here
+# class Property(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     address = db.Column(db.String, nullable=False)
+#     # add columns for other details here
 
 
 def recreate_all_databases():
@@ -118,3 +94,4 @@ def recreate_all_databases():
 
 if __name__ == '__main__':
     recreate_all_databases()
+    # db.create_all()
