@@ -49,6 +49,8 @@ def check():
                 return redirect(url_for("landlord"))
             else:
                 print("Not a landlord")
+        if request.form.get("upload"):
+            return redirect(url_for("upload_lease"))
     return render_template("check.html", logout_form=logout_form, portal_form=portal_form)
 
 
@@ -291,8 +293,8 @@ UPLOAD_FOLDER = os.path.join(basedir, 'Upload')
 app.config['UPLOADED_LEASES_DEST'] = UPLOAD_FOLDER
 configure_uploads(app, leases)
 
-@login_required
 @app.route('/Upload', methods=['GET', 'POST'])
+@login_required
 def upload_lease():
     upform= LeaseUploadForm()
     if upform.validate_on_submit():
@@ -306,6 +308,7 @@ def upload_lease():
         print(ext)
         print(os.path.abspath(leasename))
         print(leases.extensions)
+        print(current_user)
         return send_from_directory(app.config['UPLOADED_LEASES_DEST'], leasename)
     return render_template("upload.html",upform=upform,types=leases.extensions,errors=None)
 

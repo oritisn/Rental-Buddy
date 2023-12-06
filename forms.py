@@ -16,7 +16,7 @@ class LogoutForm(FlaskForm):
 class PortalForm(FlaskForm):
     landlord = SubmitField("Landlord")
     tenant = SubmitField("Tenant")
-
+    upload = SubmitField("upload")
 
 class RegisterForm(FlaskForm):
     username = StringField("Username", validators=[InputRequired()])                    #UNIQUE
