@@ -1,0 +1,460 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&display=swap');
+.group-child {
+    top: 0;
+    object-fit: cover;
+  }
+  .group-child,
+  .group-item,
+  .rectangle-parent {
+    position: absolute;
+    left: 0;
+    width: 1512px;
+    height: 1011px;
+  }
+  .group-item {
+    top: 0;
+    background-color: #252b30;
+  }
+  .rectangle-parent {
+    top: 3139px;
+    display: none;
+  }
+  .executive-team,
+  .free-resources,
+  .strategy {
+    position: absolute;
+    top: 10px;
+    left: 109px;
+    text-transform: lowercase;
+  }
+  .free-resources,
+  .strategy {
+    left: 299px;
+  }
+  .free-resources {
+    left: 430px;
+  }
+  .register {
+    position: relative;
+    text-transform: capitalize;
+  }
+  .register-wrapper {
+    position: absolute;
+    top: 0;
+    left: 730px;
+    border-radius: 10px;
+    background-color: #d74632;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 14px 28px;
+    color: var(--color-white);
+  }
+  .home {
+    top: 0;
+    text-transform: lowercase;
+  }
+  .home,
+  .home-wrapper,
+  .more {
+    position: absolute;
+    left: 0;
+  }
+  .home-wrapper {
+    top: 10px;
+    width: 48px;
+    height: 22px;
+  }
+  .more {
+    top: 0;
+    text-transform: lowercase;
+    font-weight: 600;
+  }
+  .more-parent,
+  .vector-icon {
+    position: absolute;
+    top: 10.3px;
+    left: 49.3px;
+    width: 9.5px;
+    height: 5.5px;
+  }
+  .more-parent {
+    top: 10px;
+    left: 613px;
+    width: 58px;
+    height: 22px;
+    color: var(--color-sandybrown);
+  }
+  .executive-team-parent,
+  .faq-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 860px;
+    height: 50px;
+  }
+  .faq-inner {
+    top: 25px;
+    left: 532px;
+  }
+  .what-is-rental {
+    position: absolute;
+    top: 0;
+    left: 0.1px;
+    line-height: 23.78px;
+    color: var(--color-sandybrown);
+  }
+  .group-inner,
+  .vitae-congue-eu {
+    position: absolute;
+    top: 9.3px;
+    left: 525.9px;
+    width: 13.6px;
+    height: 1.7px;
+  }
+  .vitae-congue-eu {
+    top: 34.8px;
+    left: 0.1px;
+    font-size: 15.29px;
+    line-height: 25.48px;
+    display: inline-block;
+    width: 489.3px;
+    height: 76.4px;
+  }
+  .line-div {
+    position: absolute;
+    top: 136.5px;
+    left: -0.2px;
+    border-top: 0.5px solid var(--color-gray);
+    box-sizing: border-box;
+    width: 559.2px;
+    height: 0.5px;
+  }
+  .how-does-rental {
+    position: absolute;
+    top: 170.7px;
+    left: 0.1px;
+    line-height: 23.78px;
+  }
+  .group-child1,
+  .group-icon {
+    position: absolute;
+    top: 171.6px;
+    left: 519.9px;
+    width: 13.6px;
+    height: 13.6px;
+  }
+  .group-child1 {
+    top: 401.5px;
+    left: -0.2px;
+    border-top: 0.5px solid var(--color-gray);
+    box-sizing: border-box;
+    width: 559.2px;
+    height: 0.5px;
+  }
+  .what-if-i {
+    position: absolute;
+    top: 435.8px;
+    left: 0.1px;
+    line-height: 23.78px;
+  }
+  .group-child2,
+  .group-child3 {
+    position: absolute;
+    top: 436.6px;
+    left: 519.9px;
+    width: 13.6px;
+    height: 13.6px;
+  }
+  .group-child3 {
+    top: 224.8px;
+    left: -0.2px;
+    border-top: 0.5px solid var(--color-gray);
+    box-sizing: border-box;
+    width: 559.2px;
+    height: 0.5px;
+  }
+  .can-i-customize {
+    position: absolute;
+    top: 259.1px;
+    left: 0.1px;
+    line-height: 23.78px;
+  }
+  .group-child4,
+  .group-child5 {
+    position: absolute;
+    top: 259.9px;
+    left: 519.9px;
+    width: 13.6px;
+    height: 13.6px;
+  }
+  .group-child5 {
+    top: 489.9px;
+    left: -0.2px;
+    border-top: 0.5px solid var(--color-gray);
+    box-sizing: border-box;
+    width: 559.2px;
+    height: 0.5px;
+  }
+  .can-i-use {
+    position: absolute;
+    top: 524.1px;
+    left: 0.1px;
+    line-height: 23.78px;
+  }
+  .group-child6,
+  .group-child7 {
+    position: absolute;
+    top: 524.9px;
+    left: 519.9px;
+    width: 13.6px;
+    height: 13.6px;
+  }
+  .group-child7 {
+    top: 313.2px;
+    left: -0.1px;
+    border-top: 0.5px solid var(--color-gray);
+    box-sizing: border-box;
+    width: 559.2px;
+    height: 0.5px;
+  }
+  .is-my-data {
+    position: absolute;
+    top: 347.4px;
+    left: 0.3px;
+    line-height: 23.78px;
+  }
+  .group-child8 {
+    position: absolute;
+    top: 348.3px;
+    left: 520.1px;
+    width: 13.6px;
+    height: 13.6px;
+  }
+  .what-is-rental-buddy-parent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 558.8px;
+    height: 548.1px;
+  }
+  .what-happens-if {
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 23.78px;
+  }
+  .group-child9 {
+    position: absolute;
+    top: 9.3px;
+    left: 525.7px;
+    width: 13.6px;
+    height: 1.7px;
+  }
+  .vitae-congue-eu1 {
+    position: absolute;
+    top: 34.8px;
+    left: 0;
+    font-size: 15.29px;
+    line-height: 25.48px;
+    color: var(--color-darkslategray-100);
+    display: inline-block;
+    width: 489.3px;
+    height: 76.4px;
+  }
+  .what-happens-if-theres-a-disp-parent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 538.5px;
+    height: 111.3px;
+  }
+  .group-child10,
+  .group-div {
+    position: absolute;
+    width: 558.6px;
+  }
+  .group-child10 {
+    top: 136.5px;
+    left: 0.2px;
+    border-top: 0.5px solid var(--color-gray);
+    box-sizing: border-box;
+    height: 0.5px;
+  }
+  .group-div {
+    top: 176.7px;
+    left: 0;
+    height: 136.8px;
+    color: var(--color-sandybrown);
+  }
+  .group-child11,
+  .group-child12 {
+    position: absolute;
+    top: 0.8px;
+    left: 519.8px;
+    width: 13.6px;
+    height: 13.6px;
+  }
+  .group-child12 {
+    top: 54.1px;
+    left: 0.2px;
+    border-top: 0.5px solid var(--color-gray);
+    box-sizing: border-box;
+    width: 558.6px;
+    height: 0.5px;
+  }
+  .how-do-i-get-started-parent,
+  .what-payment-methods-are-suppo-parent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 558.6px;
+    height: 54.4px;
+  }
+  .what-payment-methods-are-suppo-parent {
+    top: 435.8px;
+  }
+  .how-do-i1 {
+    position: absolute;
+    top: 0.1px;
+    left: 0;
+    line-height: 23.78px;
+  }
+  .group-child15 {
+    position: absolute;
+    top: -0.8px;
+    left: 551.3px;
+    width: 13.6px;
+    height: 13.6px;
+  }
+  .group-child17,
+  .how-do-i-invite-my-tenants-my-parent {
+    position: absolute;
+    top: 524px;
+    left: 0;
+    width: 564.1px;
+    height: 24.1px;
+  }
+  .group-child17 {
+    top: 54.1px;
+    left: 0.3px;
+    border-top: 0.5px solid var(--color-gray);
+    box-sizing: border-box;
+    width: 558.6px;
+    height: 0.5px;
+  }
+  .group-child18,
+  .is-rental-buddy-suitable-for-b-parent {
+    position: absolute;
+    top: 88.4px;
+    left: 0;
+    width: 558.7px;
+    height: 54.4px;
+  }
+  .group-child18 {
+    top: 54.1px;
+    border-top: 0.5px solid var(--color-gray);
+    box-sizing: border-box;
+    width: 558.6px;
+    height: 0.5px;
+  }
+  .line-parent {
+    position: absolute;
+    top: 347.4px;
+    left: 0.2px;
+    width: 558.4px;
+    height: 54.4px;
+  }
+  .faq-child,
+  .group-container,
+  .group-parent {
+    position: absolute;
+    top: 0;
+    left: 658.8px;
+    width: 564.1px;
+    height: 548.1px;
+  }
+  .faq-child,
+  .group-parent {
+    left: 0;
+    width: 1222.9px;
+  }
+  .faq-child {
+    top: 626px;
+    left: 126px;
+    width: 1217.5px;
+    font-size: 18.69px;
+    font-family: var(--font-dm-sans);
+  }
+  .faqs {
+    position: absolute;
+    top: 392px;
+    left: 721px;
+    font-size: 65px;
+    line-height: 23.78px;
+    font-family: var(--font-poppins);
+  }
+  .asking-question-1-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+  }
+  .asking-question-1 {
+    position: absolute;
+    top: 161px;
+    left: 385px;
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+  }
+  .faq-item {
+    position: absolute;
+    top: 379px;
+    left: 764px;
+    border-radius: 50%;
+    background-color: rgba(45, 193, 20, 0.33);
+    filter: blur(59px);
+    width: 128px;
+    height: 74px;
+  }
+  .faq,
+  .underline-06-icon {
+    position: absolute;
+    top: 444px;
+    left: 764px;
+    width: 134px;
+    height: 18px;
+  }
+  .faq {
+    top: 71px;
+    left: 55px;
+    background-color: var(--color-white);
+    width: 1512px;
+    height: 1482px;
+    overflow: hidden;
+  }
+  .image-3-icon {
+    position: absolute;
+    top: 98px;
+    left: 134px;
+    border-radius: 250px;
+    width: 211px;
+    height: 69px;
+    object-fit: cover;
+  }
+  .faqs-page {
+    position: relative;
+    background-color: #f7f1f1;
+    width: 100%;
+    height: 1592px;
+    overflow: hidden;
+    text-align: left;
+    font-size: var(--font-size-lg);
+    color: var(--color-darkslategray-100);
+    font-family: var(--font-inter);
+  }
+  
