@@ -73,7 +73,28 @@
 
    <h1 class="heading">Lease agreement</h1>
 
-   <div class="box-container">
+   <body>
+      
+      <h1>Upload new lease</h1>
+      {%   if errors != None  %}
+        {{errors}}
+      {%  else %}
+        File types allowed:{% for e in types %}
+        {{ e }}
+      {% endfor %}
+      {%   endif   %}
+      
+      <form method="post" enctype="multipart/form-data">
+      
+      {{upform.hidden_tag()}}
+      {{upform.lease(size=20)}}
+      {{upform.submit(size=20)}}
+        </form>
+      <form method="post" enctype="multipart/form-data" target="_blank">
+          {{display.hidden_tag()}}
+        {{display.submit2(size=20)}}
+      </form>
+      </body>
 
         
      
