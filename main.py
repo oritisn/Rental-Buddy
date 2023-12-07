@@ -283,11 +283,7 @@ def landlord():
             leasename = leases.save(request.files['lease'])
         except UploadNotAllowed:
             return    render_template('Landlord.html',upform=upform,errors=f"Wrong file format. Currently only supporting .txt and .pdf",types=leases.extensions,display=display)
-
-        print(leasename)
         ext = os.path.splitext(leasename)[1]
-        print(current_user)
-        print(current_user.id)
         landlord = db.session.query(Landlord).filter(Landlord.user_id == current_user.id).first()
         newlease = Lease(leasename,landlord)
         db.session.add(newlease)
