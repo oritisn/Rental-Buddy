@@ -14,12 +14,12 @@ from app import db
 #                              db.Column("property_id", db.Integer, db.ForeignKey('property.id')),
 #                              db.Column("landlord_id", db.Integer, db.ForeignKey('landlord.landlord_id'))
 #                              )
-lease_Tenant = db.Table("lease_tenant",
+Lease_Tenant = db.Table("lease_tenant",
                            db.Column("lease_id", db.Integer, db.ForeignKey('lease.lease_id')),
                            db.Column("tenant_id", db.Integer, db.ForeignKey('tenant.tenant_id'))
                            )
 
-lease_Landlord = db.Table("lease_landlord",
+Lease_Landlord = db.Table("lease_landlord",
                              db.Column("lease_id", db.Integer, db.ForeignKey('lease.lease_id')),
                              db.Column("landlord_id", db.Integer, db.ForeignKey('landlord.landlord_id'))
                              )
@@ -67,8 +67,12 @@ class Landlord(db.Model):
 class Lease(db.Model):
     lease_id = db.Column(db.Integer,primary_key=True)
     file_name=db.Column(db.String,nullable=False,unique=True)
-    def __init__(self,file_name):
+    landlord=db.relationship("Landlord",secondary=Lease_Landlord,backref="Lease")
+    def __init__(self,file_name,landlord):
         self.file_name = file_name
+        self.landlord.append(landlord)
+    def __repr__(self):
+       return f"{self.lease_id} {self.file_name} {self.landlord}"
 
 # class Property(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
@@ -93,5 +97,5 @@ def recreate_all_databases():
 
 
 if __name__ == '__main__':
-    recreate_all_databases()
-    # db.create_all()
+    # recreate_all_databases()
+    db.create_all()

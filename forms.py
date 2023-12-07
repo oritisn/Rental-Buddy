@@ -44,3 +44,7 @@ class SettingsForm(FlaskForm):
 class LeaseUploadForm(FlaskForm):
     lease = FileField()
     submit = SubmitField("Upload")
+
+#temp for display test
+class DisplayForm(FlaskForm):
+    submit2 = SubmitField("Display")
