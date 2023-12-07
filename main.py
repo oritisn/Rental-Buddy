@@ -334,24 +334,21 @@ def contacts():
 @app.route('/Upload', methods=['GET', 'POST'])
 @login_required
 def upload_lease():
+    display = DisplayForm()
     upform = LeaseUploadForm()
     if upform.validate_on_submit():
         print("Upload Block")
         try:
             leasename = leases.save(request.files['lease'])
         except UploadNotAllowed:
-            return render_template("upload1.html", upform=upform, types=leases.extensions,
+            return render_template("lease.html", upform=upform, types=leases.extensions,
                                    errors=f"Wrong file format. Currently only supporting .txt and .pdf")
-        print(leasename)
         ext = os.path.splitext(leasename)[1]
-        print(ext)
-        print(os.path.abspath(leasename))
-        print(leases.extensions)
-        print(current_user)
-        newlease = Lease(leasename)
-
+        newlease = Lease(leasename, landlord=current_user)
+        db.session.add(newlease)
+        db.session.commit()
         return send_from_directory(app.config['UPLOADED_LEASES_DEST'], leasename)
-    return render_template("upload1.html", upform=upform, types=leases.extensions, errors=None)
+    return render_template("lease.html", upform=upform, errors=None,types=leases.extensions, display=display)
 
 
 if __name__ == '__main__':
