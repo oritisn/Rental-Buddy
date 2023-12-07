@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&display=swap');
 
 :root{
-   --main-color:#d77091;
-   --red:#bbfdc8;
-   --orange:#fafcf4;
-   --light-color:#c9aeae;
-   --light-bg:#eed2c2;
-   --black:#561643;
-   --white:#fffbe8;
+   --main-color:#4C535F;
+   --red:rgb(243, 161, 152);
+   --orange:#165624;
+   --light-color:#165624;
+   --light-bg:rgb(255, 255, 255);
+   --black:#165624;
+   --white:#f6e48b;
    --border:.1rem solid rgba(0,0,0,.2);
 }
 
@@ -21,7 +21,7 @@
 
 *::selection{
    background-color: var(--main-color);
-   color:#fff;
+   color:#fedb8c;
 }
 
 html{
@@ -50,7 +50,7 @@ body{
 body.dark{
    --light-color:#aaa;
    --light-bg:#333;
-   --black:#fff;
+   --black:#F5F5F5;
    --white:#222;
    --border:.1rem solid rgba(255,255,255,.2);
 }
@@ -1296,6 +1296,13 @@ section{
    color:var(--main-color);
 }
 
+.image {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
 
 
 @media (max-width:1200px){
@@ -1374,4 +1381,3 @@ section{
    }
 
 }
-

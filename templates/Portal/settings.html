@@ -60,18 +60,18 @@
    </div>
 
    <nav class="navbar">
-      <a href="home.html"><i class="fas fa-house-user"></i><span>Home</span></a>
-      <a href="lease.html"><i class="fa-solid fa-pencil"></i><span>Lease</span></a>
-      <a href="FAQs.html"><i class="fa-solid fa-question"></i></i><span>FAQs</span></a>
-  <a href="settings.html"><i class="fa-solid fa-gears"></i></i><span>Settings</span></a>
-      <a href="contact.html"><i class="fas fa-phone"></i><span>Contact us</span></a>
-   </nav>
+    <a href="home.html"><i class="fas fa-house-user"></i><span>Home</span></a>
+    <a href="lease.html"><i class="fa-solid fa-pencil"></i><span>Lease</span></a>
+    <a href="FAQs.html"><i class="fa-solid fa-question"></i></i><span>FAQs</span></a>
+    <a href="settings.html"><i class="fa-solid fa-gears"></i></i><span>Settings</span></a>
+    <a href="contact.html"><i class="fas fa-phone"></i><span>Contact us</span></a>
+ </nav>
 
 </div>
 
 <section class="home-grid">
 
-   <h1 class="heading">Welcome Back</h1>
+   <h1 class="heading">Home</h1>
 
    <div class="box-container">
 
@@ -85,58 +85,24 @@
    </div>
          </div>
         
-         <section class="leases">
+         <section class="form-container">
 
-            <h1 class="heading">My Leases</h1>
-         
-            <div class="box-container">
-         
-               <div class="box">
-                  <div class="Tenant">
-                     <img src="\images\pic-2.jpg" alt="" width="50">
-                     <div class="info">
-                        <h3>Jane Deo</h3>
-                        <span>21-11-2023</span>
-                     </div>
-                  </div>
-                  <div class="thumb">
-                     <img src="\images\WHT200102_01.jpg" alt="" width="250">
-                  </div>
-                  <h3 class="title">Three bedroom house in Epsom</h3>
-                  <a href="lease.html" class="inline-btn">View lease</a>
-               </div>
-         
-               <div class="box">
-                  <div class="tutor">
-                     <img src="\images\pic-3.jpg" alt="" width="50">
-                     <div class="info">
-                        <h3>John Cena</h3>
-                        <span>21-11-2023</span>
-                     </div>
-                  </div>
-                  <div class="thumb">
-                     <img src="\images\s.webp" alt="" width="250">
-                  </div>
-                  <h3 class="title">Two bedroom Flat in Ealing</h3>
-                  <a href="lease.html" class="inline-btn">View lease</a>
-               </div>
-         
-               <div class="box">
-                  <div class="tutor">
-                     <img src="\images\pic-4.jpg" alt="" width="50">
-                     <div class="info">
-                        <h3>John Deo</h3>
-                        <span>21-10-2022</span>
-                     </div>
-                  </div>
-                  <div class="thumb">
-                     <img src="\images\850.jpeg" alt="" width="250">
-                  </div>
-                  <h3 class="title">Four bedroom house in Surrey</h3>
-                  <a href="lease.html" class="inline-btn">View lease</a>
-               </div>
-         
-            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+               <h3>update profile</h3>
+               <p>update name</p>
+               <input type="text" name="name" placeholder="Naima" maxlength="50" class="box">
+               <p>update email</p>
+               <input type="email" name="email" placeholder="Naima01204h@gmail.come" maxlength="50" class="box">
+               <p>previous password</p>
+               <input type="password" name="old_pass" placeholder="enter your old password" maxlength="20" class="box">
+               <p>new password</p>
+               <input type="password" name="new_pass" placeholder="enter your old password" maxlength="20" class="box">
+               <p>confirm password</p>
+               <input type="password" name="c_pass" placeholder="confirm your new password" maxlength="20" class="box">
+               <p>update pic</p>
+               <input type="file" accept="image/*" class="box">
+               <input type="submit" value="update profile" name="submit" class="btn">
+            </form>
          
          </section>
          
