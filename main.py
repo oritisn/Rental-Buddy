@@ -308,7 +308,7 @@ def tenant():
 
 @app.route("/Testing")
 def testing():
-    return render_template("LoginRegister.html")
+    return render_template("Homepage.html")
 
 
 

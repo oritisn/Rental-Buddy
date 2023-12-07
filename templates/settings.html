@@ -1,38 +1,125 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>home</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
-<form method="post">{{form.hidden_tag()}}
-    <fieldset>
-        <div>{{form.password.label}}
-        {{form.password(size=20)}}</div><br>
-        <div>{{form.category.label}}
-        {{form.category(size=20,style='height: 6%;')}}</div><br>
-        <div>{{form.first_name.label}}
-        {{form.first_name(size=20)}}</div><br>
-        <div>{{form.last_name.label}}
-        {{form.last_name(size=20)}}</div><br>
-        <div>{{form.email.label}}
-        {{form.email(size=20)}}</div><br>
-        <div>{{form.phone_number.label}}
-        {{form.phone_number(size=20)}}</div><br>
-        <div>{{form.address.label}}
-        {{form.address(size=20)}}</div><br>
-        <div>{{form.gender.label}}
-        {{form.gender(size=20)}}</div><br>
-        <div>{{form.date_of_birth.label}}
-        {{form.date_of_birth(size=20)}}</div><br>
-        <div>{{form.course_IELTS.label}}
-        {{form.course_IELTS(size=20)}}</div><br>
-        <div>{{form.course_B1.label}}
-        {{form.course_B1(size=20)}}</div><br>
-        <div>{{form.course_Grammar.label}}
-        {{form.course_Grammar(size=20)}}</div><br>
-        <div>{{form.submit(size=20)}}</div><br>
 
-</fieldset></form>
-</body>
-</html>
+<header class="header">
+   
+   <section class="flex">
+
+      <a href="home.html" class="logo">Rental Buddy</a>
+
+      <form action="search.html" method="post" class="search-form">
+         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+      </form>
+
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></i></div>
+         <div id="search-btn" class="fas fa-magnifying-glass-plus fa-spin"></i></div>
+         <div id="user-btn" class="fa-solid fa-user-pen"></i></i></div>
+         <div id="toggle-btn" class="fa-regular fa-lightbulb"></i></div>
+      </div>
+
+      <div class="profile">
+         <img src="C:\Users\Student\Downloads\front-end - Endeavour website (1)\desgin\images\pic-7.jpg" class="image" alt="">
+         <h3 class="name">Naima Mohamed</h3>
+         <p class="role">Landlord</p>
+         <div class="flex-btn">
+            <a href="logout.html" class="option-btn">Logout</a>
+         </div>
+      </div>
+
+   </section>
+
+</header>   
+
+<div class="side-bar">
+
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+
+   <div class="profile">
+      <img src="C:\Users\Student\Downloads\front-end - Endeavour website (1)\desgin\images\pic-7.jpg" class="image" alt="">
+      <h3 class="name">Naima Mohamed</h3>
+      <p class="role">Landlord</p>
+      <a href="profile.html" class="btn">View profile</a>
+   </div>
+
+   <nav class="navbar">
+    <a href="home.html"><i class="fas fa-house-user"></i><span>Home</span></a>
+    <a href="lease.html"><i class="fa-solid fa-pencil"></i><span>Lease</span></a>
+    <a href="FAQs.html"><i class="fa-solid fa-question"></i></i><span>FAQs</span></a>
+    <a href="settings.html"><i class="fa-solid fa-gears"></i></i><span>Settings</span></a>
+    <a href="contact.html"><i class="fas fa-phone"></i><span>Contact us</span></a>
+ </nav>
+
+</div>
+
+<section class="home-grid">
+
+   <h1 class="heading">Home</h1>
+
+   <div class="box-container">
+
+      <div class="row">
+        <div class="image">
+            <image src="\images\image for home page.PNG" alt="">  
+            </image>
+            
+            <div class="more-btn">
+      <a href="Lease.html" class="inline-option-btn">Start new leases</a>
+   </div>
+         </div>
+        
+         <section class="form-container">
+
+            <form action="" method="post" enctype="multipart/form-data">
+               <h3>update profile</h3>
+               <p>update name</p>
+               <input type="text" name="name" placeholder="Naima" maxlength="50" class="box">
+               <p>update email</p>
+               <input type="email" name="email" placeholder="Naima01204h@gmail.come" maxlength="50" class="box">
+               <p>previous password</p>
+               <input type="password" name="old_pass" placeholder="enter your old password" maxlength="20" class="box">
+               <p>new password</p>
+               <input type="password" name="new_pass" placeholder="enter your old password" maxlength="20" class="box">
+               <p>confirm password</p>
+               <input type="password" name="c_pass" placeholder="confirm your new password" maxlength="20" class="box">
+               <p>update pic</p>
+               <input type="file" accept="image/*" class="box">
+               <input type="submit" value="update profile" name="submit" class="btn">
+            </form>
+         
+         </section>
+         
+
+   
+
+</section>
+
+<footer class="footer">
+
+    &copy; copyright @ 2023 by <span>Rental Buddy</span> | all rights reserved!
+ 
+ </footer>
+ 
+ <!-- custom js file link  -->
+ <script src="js/script.js"></script>
+ 
+    
+ </body>
+ </html>
