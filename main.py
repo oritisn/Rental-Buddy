@@ -283,11 +283,7 @@ def landlord():
             leasename = leases.save(request.files['lease'])
         except UploadNotAllowed:
             return    render_template('Landlord.html',upform=upform,errors=f"Wrong file format. Currently only supporting .txt and .pdf",types=leases.extensions,display=display)
-
-        print(leasename)
         ext = os.path.splitext(leasename)[1]
-        print(current_user)
-        print(current_user.id)
         landlord = db.session.query(Landlord).filter(Landlord.user_id == current_user.id).first()
         newlease = Lease(leasename,landlord)
         db.session.add(newlease)
@@ -296,13 +292,10 @@ def landlord():
     if display.submit2.data and display.validate():
         print("Display clicked")
         leases1 = db.session.query(Lease.file_name).join(Lease.landlord).filter_by(landlord_id=Landlord.landlord_id).all()
-        print(leases1)
         try:
             lease_target=leases1[0][0]
         except IndexError:
             return    render_template('Landlord.html',upform=upform,errors=f"No leases to display",types=leases.extensions,display=display)
-
-
         return send_from_directory(app.config['UPLOADED_LEASES_DEST'], lease_target)
     return base_temp
 
