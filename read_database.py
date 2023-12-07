@@ -4,6 +4,7 @@ Used to read what's in the database"""
 import os
 import pandas as pd
 import sqlalchemy
+from sqlalchemy import delete
 
 from app import db
 from models import Lease, Lease_Landlord
@@ -24,4 +25,5 @@ if __name__ == '__main__':
     #
     # print(Lease.query.delete())
     # print(Lease_Landlord.query.delete)
+    #
     # db.session.commit()

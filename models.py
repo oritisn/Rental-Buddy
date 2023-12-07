@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, delete
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from app import db
@@ -97,5 +97,7 @@ def recreate_all_databases():
 
 
 if __name__ == '__main__':
-    # recreate_all_databases()
-    db.create_all()
+    recreate_all_databases()
+    # db.create_all()
+    # stmt = delete(Lease_Landlord).where(Lease_Landlord.c.landlord_id==1)
+    # print(stmt)

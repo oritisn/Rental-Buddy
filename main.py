@@ -297,8 +297,13 @@ def landlord():
         print("Display clicked")
         leases1 = db.session.query(Lease.file_name).join(Lease.landlord).filter_by(landlord_id=Landlord.landlord_id).all()
         print(leases1)
+        try:
+            lease_target=leases1[0][0]
+        except IndexError:
+            return    render_template('Landlord.html',upform=upform,errors=f"No leases to display",types=leases.extensions,display=display)
 
-        return 1
+
+        return send_from_directory(app.config['UPLOADED_LEASES_DEST'], lease_target)
     return base_temp
 
 
