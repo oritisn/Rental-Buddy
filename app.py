@@ -23,4 +23,4 @@ app.config['DEBUG'] = True
 lm = LoginManager()
 lm.init_app(app)
 lm.login_view = "/"
-app.config["REMEMBER_COOKIE_DURATION"] = timedelta(seconds=30,minutes=5)
+app.config["REMEMBER_COOKIE_DURATION"] = timedelta(seconds=30,minutes=30)
