@@ -3,8 +3,7 @@ from datetime import datetime
 from sqlalchemy import ForeignKey
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from app import db, app
-from itsdangerous.url_safe import URLSafeTimedSerializer as Serializer
+from app import db
 
 # Property_Tenant = db.Table("property_tenant",
 #                            db.Column("property_id", db.Integer, db.ForeignKey('property.id')),
@@ -16,15 +15,14 @@ from itsdangerous.url_safe import URLSafeTimedSerializer as Serializer
 #                              db.Column("landlord_id", db.Integer, db.ForeignKey('landlord.landlord_id'))
 #                              )
 lease_Tenant = db.Table("lease_tenant",
-                        db.Column("lease_id", db.Integer, db.ForeignKey('lease.lease_id')),
-                        db.Column("tenant_id", db.Integer, db.ForeignKey('tenant.tenant_id'))
-                        )
+                           db.Column("lease_id", db.Integer, db.ForeignKey('lease.lease_id')),
+                           db.Column("tenant_id", db.Integer, db.ForeignKey('tenant.tenant_id'))
+                           )
 
 lease_Landlord = db.Table("lease_landlord",
-                          db.Column("lease_id", db.Integer, db.ForeignKey('lease.lease_id')),
-                          db.Column("landlord_id", db.Integer, db.ForeignKey('landlord.landlord_id'))
-                          )
-
+                             db.Column("lease_id", db.Integer, db.ForeignKey('lease.lease_id')),
+                             db.Column("landlord_id", db.Integer, db.ForeignKey('landlord.landlord_id'))
+                             )
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -32,19 +30,6 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(200), nullable=False)
     email = db.Column(db.String(200), nullable=False, unique=True)
     date_added = db.Column(db.DateTime, default=datetime.utcnow())
-
-    def get_reset_token(self, expires_sec=1800):
-        s = Serializer(app.config['SECRET_KEY'], expires_sec)
-        return s.dumps({'user_id': self.id}).decode('utf-8')
-
-    @staticmethod
-    def verify_reset_token(token):
-        s = Serializer(app.config['SECRET_KEY'])
-        try:
-            user_id = s.loads(token)['user_id']
-        except:
-            return None
-        return User.query.get(user_id)
 
     def set_password(self, password):
         """Create hashed password."""
@@ -68,30 +53,22 @@ class User(UserMixin, db.Model):
                f'email: {self.email}' \
                f'date added: {self.date_added}'
 
-
 class Tenant(db.Model):
     tenant_id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-    def __init__(self, user_id):
-        self.user_id = user_id
-
-
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
+    def __init__(self,user_id):
+        self.user_id=user_id
 class Landlord(db.Model):
     landlord_id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-    def __init__(self, user_id):
-        self.user_id = user_id
-
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
+    def __init__(self,user_id):
+        self.user_id=user_id
 
 class Lease(db.Model):
-    lease_id = db.Column(db.Integer, primary_key=True)
-    file_name = db.Column(db.String, nullable=False, unique=True)
-
-    def __init__(self, file_name):
+    lease_id = db.Column(db.Integer,primary_key=True)
+    file_name=db.Column(db.String,nullable=False,unique=True)
+    def __init__(self,file_name):
         self.file_name = file_name
-
 
 # class Property(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
@@ -112,7 +89,7 @@ def recreate_all_databases():
     db.create_all()
     print("Created")
     db.session.commit()
-    print("Committed")      
+    print("Committed")
 
 
 if __name__ == '__main__':
