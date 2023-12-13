@@ -271,6 +271,7 @@ def index():
         print("not login")
     return render_template('loginregister.html', methods=['GET'], login_form=login_form, register_form=register_form)
 
+
 @app.route("/Tenant", methods=['GET', 'POST'])
 @login_required
 def tenant():
@@ -331,7 +332,8 @@ def upload_lease():
         try:
             lease_target = leases1[0][0]
         except IndexError:
-            return render_template("landlord/lease.html", upform=upform, errors="No current leases", types=leases.extensions, display=display)
+            return render_template("landlord/lease.html", upform=upform, errors="No current leases",
+                                   types=leases.extensions, display=display)
         # yield send_from_directory(app.config['UPLOADED_LEASES_DEST'], lease_target)
         display_generator(lease_target=lease_target)
         print("test successful")
@@ -345,10 +347,11 @@ def display_generator(lease_target):
     return send_from_directory(app.config['UPLOADED_LEASES_DEST'], lease_target)
 
 
-@app.route("/LandlordTenantChoice")
+@app.route("/LandlordTenant")
 @login_required
 def LandlordTenantChoice():
     return render_template("LandlordTenantChoice.html")
+
 
 @app.route("/Settings")
 @login_required
