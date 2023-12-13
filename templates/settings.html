@@ -19,7 +19,7 @@
    
    <section class="flex">
 
-      <a href="{{url_for('testing')}}" class="logo">Rental Buddy</a>
+      <a href="{{url_for('landlord_homepage')}}" class="logo">Rental Buddy</a>
 
       <form action="search.html" method="post" class="search-form">
          <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
@@ -60,8 +60,8 @@
    </div>
 
    <nav class="navbar">
-    <a href="{{url_for('testing')}}"><i class="fas fa-house-user"></i><span>Home</span></a>
-    <a href="lease.html"><i class="fa-solid fa-pencil"></i><span>Lease</span></a>
+    <a href="{{url_for('landlord_homepage')}}"><i class="fas fa-house-user"></i><span>Home</span></a>
+    <a href="{{url_for("upload_lease")}}"><i class="fa-solid fa-pencil"></i><span>Lease</span></a>
     <a href="{{url_for("faq")}}"><i class="fa-solid fa-question"></i></i><span>FAQs</span></a>
     <a href="settings.html"><i class="fa-solid fa-gears"></i></i><span>Settings</span></a>
     <a href="contact.html"><i class="fas fa-phone"></i><span>Contact us</span></a>
@@ -81,7 +81,7 @@
             </image>
             
             <div class="more-btn">
-      <a href="Lease.html" class="inline-option-btn">Start new leases</a>
+      <a href="{{url_for("upload_lease")}}" class="inline-option-btn">Start new leases</a>
    </div>
          </div>
         
