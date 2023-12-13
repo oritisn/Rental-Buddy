@@ -238,7 +238,7 @@ def index():
                 db.session.commit()
 
                 del toAddUser
-                return redirect("/User/Check", code=301)
+                return redirect(url_for("LandlordTenantChoice"))
             # else:
             #     form = RegisterForm()
             #     response = render_template("add_user.html", form=form, errors=validatedform)
@@ -312,6 +312,7 @@ def tenant():
 
 
 @app.route("/Landlord")
+@login_required
 def landlord_homepage():
     return render_template("LandlordHomepage.html")
 
@@ -336,7 +337,7 @@ def contacts():
 def upload_lease():
     display = DisplayForm()
     upform = LeaseUploadForm()
-    if upform.validate_on_submit():
+    if upform.submit.data and upform.validate():
         print("Upload Block")
         try:
             leasename = leases.save(request.files['lease'])
@@ -362,7 +363,25 @@ def upload_lease():
                 print(db.session.query(Landlord).filter_by(user_id=current_user.get_id()).first())
             except Exception as e:
                 print(e)
+    if display.submit2.data and display.validate():
+        print("Display clicked")
+        leases1 = db.session.query(Lease.file_name).join(Lease.landlord).filter_by(
+            landlord_id=Landlord.landlord_id).all()
+        try:
+            lease_target = leases1[0][0]
+        except IndexError:
+            return render_template("lease.html", upform=upform, errors="No current leases", types=leases.extensions, display=display)
+        # yield send_from_directory(app.config['UPLOADED_LEASES_DEST'], lease_target)
+        display_generator(lease_target=lease_target)
+        print("test successful")
     return render_template("lease.html", upform=upform, errors=None, types=leases.extensions, display=display)
+
+
+def display_generator(lease_target):
+    print(f"disp gen run{lease_target}")
+    print(app.config['UPLOADED_LEASES_DEST'])
+    print(lease_target)
+    return send_from_directory(app.config['UPLOADED_LEASES_DEST'], lease_target)
 
 
 @app.route("/LandlordTenantChoice", )
