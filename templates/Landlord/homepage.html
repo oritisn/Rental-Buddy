@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>home</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/landlord.css">
+
+</head>
+<body>
+
+{% include "header.html" %}
+
+
+
+<section class="home-grid">
+
+   <h1 class="heading">Welcome Back</h1>
+
+   <div class="box-container">
+
+      <div class="row">
+        <div class="image">
+            <image src="\images\image for home page.PNG" alt="">
+            </image>
+            
+            <div class="more-btn">
+      <a href="{{url_for("upload_lease")}}" class="inline-option-btn">Start new leases</a>
+   </div>
+         </div>
+        
+         <section class="leases">
+
+            <h1 class="heading">My Leases</h1>
+         
+
+         
+         </section>
+         
+
+   
+
+</section>
+
+<footer class="footer">
+
+    &copy; copyright @ 2023 by <span>Rental Buddy</span> | all rights reserved!
+ 
+ </footer>
+ 
+ <!-- custom js file link  -->
+ <script src="js/script.js"></script>
+ 
+    
+ </body>
+ </html>

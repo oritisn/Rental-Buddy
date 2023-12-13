@@ -6,14 +6,13 @@ import sqlalchemy.exc
 from flask import render_template, request, redirect, url_for, flash, send_from_directory
 from flask_uploads import UploadSet, configure_uploads, UploadNotAllowed
 from flask_login import login_user, current_user, logout_user, login_required
-from forms import RegisterForm, LoginForm, LogoutForm, PortalForm,LeaseUploadForm
+from forms import RegisterForm, LoginForm, LogoutForm, PortalForm, LeaseUploadForm, DisplayForm
 from flask_wtf.csrf import CSRFError
-
 
 from app import app, db, lm, basedir
 # import models #import after importing app and db always
 
-from models import User, Tenant, Landlord,Lease
+from models import User, Tenant, Landlord, Lease, Lease_Landlord
 from upload_config import leases
 
 
@@ -27,9 +26,12 @@ def handle_csrf_error(e):
 def user_loader(id):
     user = db.session.get(User, id)
     return user
+
+
 @lm.unauthorized_handler
 def unauthorized_callback():
     return redirect(url_for('index'))
+
 
 @app.route('/User/Check', methods=['GET', 'POST'])
 def check():
@@ -236,7 +238,7 @@ def index():
                 db.session.commit()
 
                 del toAddUser
-                return redirect("/User/Check", code=301)
+                return redirect(url_for("LandlordTenantChoice"))
             # else:
             #     form = RegisterForm()
             #     response = render_template("add_user.html", form=form, errors=validatedform)
@@ -261,7 +263,7 @@ def index():
                 flash("Incorrect Password")
                 print("Failed Login")
                 return redirect(url_for("index"))
-            return redirect(url_for("check"))
+            return redirect(url_for("LandlordTenantChoice"))
         else:
             print("not a user")
             flash("Incorrect Username")
@@ -270,62 +272,93 @@ def index():
     return render_template('loginregister.html', methods=['GET'], login_form=login_form, register_form=register_form)
 
 
-
-@app.route("/Landlord")
-@login_required
-def landlord():
-    upform = LeaseUploadForm()
-    if upform.validate_on_submit():
-        print("Upload Block")
-        try:
-            leasename = leases.save(request.files['lease'])
-        except UploadNotAllowed:
-            return render_template("upload.html", upform=upform, types=leases.extensions,
-                                   errors=f"Wrong file format. Currently only supporting .txt and .pdf")
-        print(leasename)
-        ext = os.path.splitext(leasename)[1]
-        print(ext)
-        print(os.path.abspath(leasename))
-        print(leases.extensions)
-        print(current_user)
-
-        return send_from_directory(app.config['UPLOADED_LEASES_DEST'], leasename)
-    return render_template('Landlord.html',upform=upform,errors=None,types=leases.extensions)
-
-
-@app.route("/Tenant")
+@app.route("/Tenant", methods=['GET', 'POST'])
 @login_required
 def tenant():
     return render_template('Tenant.html')
 
 
-@app.route("/Testing")
-def testing():
-    return render_template("LoginRegister.html")
+@app.route("/Landlord")
+@login_required
+def landlord_homepage():
+    return render_template("landlord/homepage.html")
 
+
+@app.route("/FAQ")
+def faq():
+    return render_template("landlord/FAQs.html")
+
+
+@app.route("/Contact")
+def contact():
+    return render_template("landlord/contact.html")
 
 
 @app.route('/Upload', methods=['GET', 'POST'])
 @login_required
 def upload_lease():
-    upform= LeaseUploadForm()
-    if upform.validate_on_submit():
+    display = DisplayForm()
+    upform = LeaseUploadForm()
+    print(db.session.query(Lease_Landlord.c.lease_id).where(Lease_Landlord.c.landlord_id == current_user.get_id()).all())
+    #TODO buttons for each lease for the landlord
+    if upform.submit.data and upform.validate():
         print("Upload Block")
         try:
             leasename = leases.save(request.files['lease'])
         except UploadNotAllowed:
-            return render_template("upload.html",upform=upform,types=leases.extensions,errors=f"Wrong file format. Currently only supporting .txt and .pdf")
-        print(leasename)
-        ext = os.path.splitext(leasename)[1]
-        print(ext)
-        print(os.path.abspath(leasename))
-        print(leases.extensions)
-        print(current_user)
-        newlease = Lease(leasename)
+            return render_template("landlord/lease.html", upform=upform, types=leases.extensions,
+                                   errors=f"Wrong file format. Currently only supporting .txt and .pdf")
+        # ext = os.path.splitext(leasename)[1]
+        landlord = (db.session.query(Landlord).filter_by(user_id=current_user.get_id()).first())
+        try:
+            newlease = Lease(leasename, landlord=landlord)
+            db.session.add(newlease)
+            db.session.commit()
+            return send_from_directory(app.config['UPLOADED_LEASES_DEST'], leasename)
+        except Exception as e:
+            try:
+                print(f"New lease couldnt be created\n\n\n")
+                print(f"exception: {e}")
+                print(leasename, current_user)
+                print(current_user.username)
+                print(current_user.id)
+                print(current_user.get_id())
+                print("search")
+                print(db.session.query(Landlord).filter_by(user_id=current_user.get_id()).first())
+            except Exception as e:
+                print(e)
+    if display.submit2.data and display.validate():
+        print("Display clicked")
+        leases1 = db.session.query(Lease.file_name).join(Lease.landlord).filter_by(
+            landlord_id=Landlord.landlord_id).all()
+        try:
+            lease_target = leases1[0][0]
+        except IndexError:
+            return render_template("landlord/lease.html", upform=upform, errors="No current leases",
+                                   types=leases.extensions, display=display)
+        # yield send_from_directory(app.config['UPLOADED_LEASES_DEST'], lease_target)
+        display_generator(lease_target=lease_target)
+        print("test successful")
+    return render_template("landlord/lease.html", upform=upform, errors=None, types=leases.extensions, display=display)
 
-        return send_from_directory(app.config['UPLOADED_LEASES_DEST'], leasename)
-    return render_template("upload.html",upform=upform,types=leases.extensions,errors=None)
 
+def display_generator(lease_target):
+    print(f"disp gen run{lease_target}")
+    print(app.config['UPLOADED_LEASES_DEST'])
+    print(lease_target)
+    return send_from_directory(app.config['UPLOADED_LEASES_DEST'], lease_target)
+
+
+@app.route("/LandlordTenant")
+@login_required
+def LandlordTenantChoice():
+    return render_template("LandlordTenantChoice.html")
+
+
+@app.route("/Settings")
+@login_required
+def settings():
+    return render_template("landlord/settings.html")
 
 if __name__ == '__main__':
     app.run()
