@@ -271,40 +271,6 @@ def index():
         print("not login")
     return render_template('loginregister.html', methods=['GET'], login_form=login_form, register_form=register_form)
 
-
-# @app.route("/Landlord", methods=['GET', 'POST'])
-# @login_required
-# def landlord():
-#     upform = LeaseUploadForm()
-#     display = DisplayForm()
-#     base_temp = render_template('Landlord.html', upform=upform, errors=None, types=leases.extensions, display=display)
-#     if upform.submit.data and upform.validate():
-#         print("Upload Block")
-#         try:
-#             leasename = leases.save(request.files['lease'])
-#         except UploadNotAllowed:
-#             return render_template('Landlord.html', upform=upform,
-#                                    errors=f"Wrong file format. Currently only supporting .txt and .pdf",
-#                                    types=leases.extensions, display=display)
-#         ext = os.path.splitext(leasename)[1]
-#         landlord = db.session.query(Landlord).filter(Landlord.user_id == current_user.id).first()
-#         newlease = Lease(leasename, landlord)
-#         db.session.add(newlease)
-#         db.session.commit()
-#         return send_from_directory(app.config['UPLOADED_LEASES_DEST'], leasename)
-#     if display.submit2.data and display.validate():
-#         print("Display clicked")
-#         leases1 = db.session.query(Lease.file_name).join(Lease.landlord).filter_by(
-#             landlord_id=Landlord.landlord_id).all()
-#         try:
-#             lease_target = leases1[0][0]
-#         except IndexError:
-#             return render_template('Landlord.html', upform=upform, errors=f"No leases to display",
-#                                    types=leases.extensions, display=display)
-#         return send_from_directory(app.config['UPLOADED_LEASES_DEST'], lease_target)
-#     return base_temp
-
-
 @app.route("/Tenant", methods=['GET', 'POST'])
 @login_required
 def tenant():
@@ -314,22 +280,17 @@ def tenant():
 @app.route("/Landlord")
 @login_required
 def landlord_homepage():
-    return render_template("LandlordHomepage.html")
-
-
-@app.route("/Testing2")
-def testing2():
-    return render_template("Header.html")
+    return render_template("landlord/homepage.html")
 
 
 @app.route("/FAQ")
 def faq():
-    return render_template("FAQs.html")
+    return render_template("landlord/FAQs.html")
 
 
-@app.route("/Contacts")
-def contacts():
-    return render_template("contact.html")
+@app.route("/Contact")
+def contact():
+    return render_template("landlord/contact.html")
 
 
 @app.route('/Upload', methods=['GET', 'POST'])
@@ -342,7 +303,7 @@ def upload_lease():
         try:
             leasename = leases.save(request.files['lease'])
         except UploadNotAllowed:
-            return render_template("lease.html", upform=upform, types=leases.extensions,
+            return render_template("landlord/lease.html", upform=upform, types=leases.extensions,
                                    errors=f"Wrong file format. Currently only supporting .txt and .pdf")
         # ext = os.path.splitext(leasename)[1]
         landlord = (db.session.query(Landlord).filter_by(user_id=current_user.get_id()).first())
@@ -370,11 +331,11 @@ def upload_lease():
         try:
             lease_target = leases1[0][0]
         except IndexError:
-            return render_template("lease.html", upform=upform, errors="No current leases", types=leases.extensions, display=display)
+            return render_template("landlord/lease.html", upform=upform, errors="No current leases", types=leases.extensions, display=display)
         # yield send_from_directory(app.config['UPLOADED_LEASES_DEST'], lease_target)
         display_generator(lease_target=lease_target)
         print("test successful")
-    return render_template("lease.html", upform=upform, errors=None, types=leases.extensions, display=display)
+    return render_template("landlord/lease.html", upform=upform, errors=None, types=leases.extensions, display=display)
 
 
 def display_generator(lease_target):
@@ -384,11 +345,15 @@ def display_generator(lease_target):
     return send_from_directory(app.config['UPLOADED_LEASES_DEST'], lease_target)
 
 
-@app.route("/LandlordTenantChoice", )
+@app.route("/LandlordTenantChoice")
 @login_required
 def LandlordTenantChoice():
     return render_template("LandlordTenantChoice.html")
 
+@app.route("/Settings")
+@login_required
+def settings():
+    return render_template("landlord/settings.html")
 
 if __name__ == '__main__':
     app.run()
