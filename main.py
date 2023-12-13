@@ -12,7 +12,7 @@ from flask_wtf.csrf import CSRFError
 from app import app, db, lm, basedir
 # import models #import after importing app and db always
 
-from models import User, Tenant, Landlord, Lease
+from models import User, Tenant, Landlord, Lease, Lease_Landlord
 from upload_config import leases
 
 
@@ -299,6 +299,8 @@ def contact():
 def upload_lease():
     display = DisplayForm()
     upform = LeaseUploadForm()
+    print(db.session.query(Lease_Landlord.c.lease_id).where(Lease_Landlord.c.landlord_id == current_user.get_id()).all())
+    #TODO buttons for each lease for the landlord
     if upform.submit.data and upform.validate():
         print("Upload Block")
         try:
