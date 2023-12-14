@@ -354,12 +354,12 @@ def LandlordTenantChoice():
 
 
 @app.route('/download_lease/<leasename>')
-@login_required
 def download_lease(leasename):
-    #TODO check the current user against the users associated with the leasename
-    """returns the given lease file"""
-    return send_from_directory(app.config['UPLOADED_LEASES_DEST'], leasename, as_attachment=True)
-
+    print(f"Attempting to download {leasename}")
+    try:
+        return send_from_directory(app.config['UPLOADED_LEASES_DEST'], leasename, as_attachment=True)
+    except:
+        return redirect(url_for("index"))
 
 @app.route("/Settings")
 @login_required
