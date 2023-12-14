@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="UTF-8">
@@ -8,22 +8,20 @@
     <title>Rental Buddy</title>
     <link rel="stylesheet" href="css/homepage.css">
 </head>
-
 <body>
-
     <header>
-        <h2 class="Rental Buddy">Rental Buddy<h2>
-            <nav class="navigation">
-                <a href="{{url_for('index')}}">Home</a>
-                <button class="btnLogin-popup">Login</button>
-              </nav>
-            </header>
-        
+        <h2>Rental Buddy</h2>
+        <nav class="navigation">
+            <a href="{{url_for('index')}}">Home</a>
+            <button class="btnLogin-popup">Login</button>
+        </nav>
+    </header>
+
             <div class="wrapper">
                 <span class="icon-close">
                     <ion-icon name="close"></ion-icon>
                 </span>
-        
+
                 <div class="form-box login">
                     <h2>Login</h2>
                     <form method="post">
@@ -55,7 +53,7 @@
                         </div>
                     </form>
                 </div>
-        
+
                 <div class="form-box register">
                     <h2>Registration</h2>
                     <form method="post">
@@ -108,7 +106,23 @@
                     </form>
                 </div>
             </div>
-        
+<div class="center-container">
+    <div class="text-box" style="text-align:center">
+        <h1>Interactive lease agreement for landlords</h1>
+        <p>Since 2023</p>
+        <a href="" class="hero-btn">Sign Up For Free</a>
+    </div>
+</div>
+
+
+<!----course---->
+<!--<section class="course">-->
+<!--    <div>-->
+<!--        <h1>Courses We Offer</h1>-->
+<!--        <p>Lorem impsum alekfjlejflejve fenvrvr </p>-->
+<!--    </div>-->
+
+<!--</section>-->
         
             <script src="js/loginbutton.js"></script>
             <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

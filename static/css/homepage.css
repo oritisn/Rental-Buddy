@@ -193,6 +193,15 @@ header {
   font-weight: 600;
   padding: 0 35px 0 5px;
 }
+.text-box {
+    position: absolute;
+    top: 50%; /* Positioning 50% from the top */
+    left: 50%; /* Positioning 50% from the left */
+    transform: translate(-50%, -50%); /* Shifting it back by half its width and height to center */
+    text-align: center;
+    z-index: 10; /* Ensuring it's above other content */
+    /* Add any other styles you need for .text-box */
+}
 
 .input-box .icon {
   position: absolute;
@@ -254,4 +263,84 @@ header {
 
 .login-register p a:hover {
   text-decoration: underline;
+}
+
+
+.center-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.center-container h1{
+    font-size: 62px;
+}
+
+.center-container{
+    margin: 10px 0 40px;
+    font-size: 14px
+}
+
+.hero-btn{
+    display: inline-block;
+    text-decoration: none;
+    color: #f7b32b;
+    border: 1px solid #f7b32b;
+    padding: 12px 34px;
+    font-size: 13px;
+    background: transparent;
+    cursor: pointer;
+}
+
+.hero-btn:hover{
+    border: 1px solid #f06543;
+    background: f06543;
+    transition 1s;
+}
+
+.course{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+.center-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.center-container h1{
+    font-size: 62px;
+}
+
+.center-container{
+    margin: 10px 0 40px;
+    font-size: 14px
+}
+
+.hero-btn{
+    display: inline-block;
+    text-decoration: none;
+    color: #f7b32b;
+    border: 1px solid #f7b32b;
+    padding: 12px 34px;
+    font-size: 13px;
+    background: transparent;
+    cursor: pointer;
+}
+
+.hero-btn:hover{
+    border: 1px solid #f06543;
+    background: f06543;
+    transition 1s;
+}
+
+.course{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
 }

@@ -299,7 +299,7 @@ def contact():
 def upload_lease():
     display = DisplayForm()
     upform = LeaseUploadForm()
-    #Gets all lease IDs for the current user
+    # Gets all lease IDs for the current user
     lease_names = landlord_lease_list()
 
     if upform.submit.data and upform.validate():
@@ -307,7 +307,8 @@ def upload_lease():
         try:
             leasename = leases.save(request.files['lease'])
         except UploadNotAllowed:
-            return render_template("landlord/lease.html",lease_names=lease_names, upform=upform, types=leases.extensions,
+            return render_template("landlord/lease.html", lease_names=lease_names, upform=upform,
+                                   types=leases.extensions,
                                    errors=f"Wrong file format. Currently only supporting .txt and .pdf")
         # ext = os.path.splitext(leasename)[1]
         landlord = (db.session.query(Landlord).filter_by(user_id=current_user.get_id()).first())
@@ -337,11 +338,13 @@ def upload_lease():
         try:
             lease_target = leases1[0][0]
         except IndexError:
-            return render_template("landlord/lease.html",lease_names=lease_names, upform=upform, errors="No current leases",
+            return render_template("landlord/lease.html", lease_names=lease_names, upform=upform,
+                                   errors="No current leases",
                                    types=leases.extensions, display=display)
         # yield send_from_directory(app.config['UPLOADED_LEASES_DEST'], lease_target)
         print("test successful")
-    return render_template("landlord/lease.html",lease_names=lease_names, upform=upform, errors=None, types=leases.extensions, display=display)
+    return render_template("landlord/lease.html", lease_names=lease_names, upform=upform, errors=None,
+                           types=leases.extensions, display=display)
 
 
 def landlord_lease_list():
@@ -366,6 +369,7 @@ def LandlordTenantChoice():
 def download_lease(leasename):
     """returns the given lease file"""
     return send_from_directory(app.config['UPLOADED_LEASES_DEST'], leasename, as_attachment=True)
+
 
 @app.route("/Settings")
 @login_required
