@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from flask_sqlalchemy.session import Session
 from sqlalchemy import ForeignKey, delete
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -15,14 +16,15 @@ from app import db
 #                              db.Column("landlord_id", db.Integer, db.ForeignKey('landlord.landlord_id'))
 #                              )
 Lease_Tenant = db.Table("lease_tenant",
-                           db.Column("lease_id", db.Integer, db.ForeignKey('lease.lease_id')),
-                           db.Column("tenant_id", db.Integer, db.ForeignKey('tenant.tenant_id'))
-                           )
+                        db.Column("lease_id", db.Integer, db.ForeignKey('lease.lease_id')),
+                        db.Column("tenant_id", db.Integer, db.ForeignKey('tenant.tenant_id'))
+                        )
 
 Lease_Landlord = db.Table("lease_landlord",
-                             db.Column("lease_id", db.Integer, db.ForeignKey('lease.lease_id')),
-                             db.Column("landlord_id", db.Integer, db.ForeignKey('landlord.landlord_id'))
-                             )
+                          db.Column("lease_id", db.Integer, db.ForeignKey('lease.lease_id')),
+                          db.Column("landlord_id", db.Integer, db.ForeignKey('landlord.landlord_id'))
+                          )
+
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -53,26 +55,35 @@ class User(UserMixin, db.Model):
                f'email: {self.email}' \
                f'date added: {self.date_added}'
 
+
 class Tenant(db.Model):
     tenant_id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
-    def __init__(self,user_id):
-        self.user_id=user_id
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __init__(self, user_id):
+        self.user_id = user_id
+
+
 class Landlord(db.Model):
     landlord_id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
-    def __init__(self,user_id):
-        self.user_id=user_id
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __init__(self, user_id):
+        self.user_id = user_id
+
 
 class Lease(db.Model):
-    lease_id = db.Column(db.Integer,primary_key=True)
-    file_name=db.Column(db.String,nullable=False,unique=True)
-    landlord=db.relationship("Landlord",secondary=Lease_Landlord,backref="Lease")
-    def __init__(self,file_name,landlord):
+    lease_id = db.Column(db.Integer, primary_key=True)
+    file_name = db.Column(db.String, nullable=False, unique=True)
+    landlord = db.relationship("Landlord", secondary=Lease_Landlord, backref="Lease")
+
+    def __init__(self, file_name, landlord):
         self.file_name = file_name
         self.landlord.append(landlord)
+
     def __repr__(self):
-       return f"{self.lease_id} {self.file_name} {self.landlord}"
+        return f"{self.lease_id} {self.file_name} {self.landlord}"
+
 
 # class Property(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
@@ -98,6 +109,5 @@ def recreate_all_databases():
 
 if __name__ == '__main__':
     recreate_all_databases()
-    # db.create_all()
-    # stmt = delete(Lease_Landlord).where(Lease_Landlord.c.landlord_id==1)
-    # print(stmt)
+    db.create_all()
+

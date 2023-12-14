@@ -10,7 +10,7 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/landlord.css">
 
 </head>
 <body>
@@ -18,25 +18,31 @@
 {% include "header.html" %}
 
 
-</div>
 
 <section class="home-grid">
 
-   <h1 class="heading">Home</h1>
+   <h1 class="heading">Welcome Back</h1>
 
    <div class="box-container">
 
       <div class="row">
         <div class="image">
-            <image src="\images\image for home page.PNG" alt="">  
+            <image src="\images\image for home page.PNG" alt="">
             </image>
             
             <div class="more-btn">
-      <a href="Lease.html" class="inline-option-btn">Start new leases</a>
+      <a href="{{url_for("upload_lease")}}" class="inline-option-btn">Start new leases</a>
    </div>
          </div>
         
-     
+         <section class="leases">
+
+            <h1 class="heading">My Leases</h1>
+         
+
+         
+         </section>
+         
 
    
 
