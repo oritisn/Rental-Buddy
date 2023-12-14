@@ -299,14 +299,15 @@ def contact():
 def upload_lease():
     display = DisplayForm()
     upform = LeaseUploadForm()
-    print(db.session.query(Lease_Landlord.c.lease_id).where(Lease_Landlord.c.landlord_id == current_user.get_id()).all())
-    #TODO buttons for each lease for the landlord
+    #Gets all lease IDs for the current user
+    lease_names = landlord_lease_list()
+
     if upform.submit.data and upform.validate():
         print("Upload Block")
         try:
             leasename = leases.save(request.files['lease'])
         except UploadNotAllowed:
-            return render_template("landlord/lease.html", upform=upform, types=leases.extensions,
+            return render_template("landlord/lease.html",lease_names=lease_names, upform=upform, types=leases.extensions,
                                    errors=f"Wrong file format. Currently only supporting .txt and .pdf")
         # ext = os.path.splitext(leasename)[1]
         landlord = (db.session.query(Landlord).filter_by(user_id=current_user.get_id()).first())
@@ -314,7 +315,9 @@ def upload_lease():
             newlease = Lease(leasename, landlord=landlord)
             db.session.add(newlease)
             db.session.commit()
-            return send_from_directory(app.config['UPLOADED_LEASES_DEST'], leasename)
+            lease_names = landlord_lease_list()
+            return render_template("landlord/lease.html", lease_names=lease_names, upform=upform, errors=None,
+                                   types=leases.extensions, display=display)
         except Exception as e:
             try:
                 print(f"New lease couldnt be created\n\n\n")
@@ -334,19 +337,23 @@ def upload_lease():
         try:
             lease_target = leases1[0][0]
         except IndexError:
-            return render_template("landlord/lease.html", upform=upform, errors="No current leases",
+            return render_template("landlord/lease.html",lease_names=lease_names, upform=upform, errors="No current leases",
                                    types=leases.extensions, display=display)
         # yield send_from_directory(app.config['UPLOADED_LEASES_DEST'], lease_target)
-        display_generator(lease_target=lease_target)
         print("test successful")
-    return render_template("landlord/lease.html", upform=upform, errors=None, types=leases.extensions, display=display)
+    return render_template("landlord/lease.html",lease_names=lease_names, upform=upform, errors=None, types=leases.extensions, display=display)
 
 
-def display_generator(lease_target):
-    print(f"disp gen run{lease_target}")
-    print(app.config['UPLOADED_LEASES_DEST'])
-    print(lease_target)
-    return send_from_directory(app.config['UPLOADED_LEASES_DEST'], lease_target)
+def landlord_lease_list():
+    x = db.session.query(Lease_Landlord.c.lease_id).where(Lease_Landlord.c.landlord_id == current_user.get_id()).all()
+    y = [row[0] for row in x]
+    for i in y:
+        print(i)
+        print(type(i))
+    lease_names = Lease.query.filter(Lease.lease_id.in_(y)).with_entities(Lease.file_name).all()
+    lease_names = [item[0] for item in lease_names]
+    print(f"x{x},y{y},\nz{lease_names}")
+    return lease_names
 
 
 @app.route("/LandlordTenant")
@@ -354,6 +361,11 @@ def display_generator(lease_target):
 def LandlordTenantChoice():
     return render_template("LandlordTenantChoice.html")
 
+
+@app.route('/download_lease/<leasename>')
+def download_lease(leasename):
+    """returns the given lease file"""
+    return send_from_directory(app.config['UPLOADED_LEASES_DEST'], leasename, as_attachment=True)
 
 @app.route("/Settings")
 @login_required
