@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>home</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/tenant/tenant.css">
+
+</head>
+<body>
+
+
+
+<section class="home-grid">
+
+   <h1 class="heading">Welcome Back</h1>
+
+   <div class="box-container">
+
+      <div class="row">
+        <div class="image">
+            <image src="\images\image for home page.PNG" alt="">  
+            </image>
+            
+            <div class="more-btn">
+      <a href="{{url_for("upload_lease_tenant")}}" class="inline-option-btn">Start new leases</a>
+   </div>
+         </div>
+        
+         <section class="leases">
+
+            <h1 class="heading">Leases</h1>
+         
+            <div class="box-container">
+         
+               <div class="box">
+                  <div class="tenant">
+                     <img src="\images\pic-2.jpg" alt="" width="50">
+                     <div class="info">
+                        <h3>Jane Deo</h3>
+                        <span>21-11-2023</span>
+                     </div>
+                  </div>
+                  <div class="thumb">
+                     <img src="\images\WHT200102_01.jpg" alt="" width="250">
+                  </div>
+                  <h3 class="title">Three bedroom house in Epsom</h3>
+                  <a href="{{url_for("upload_lease_tenant")}}" class="inline-btn">View lease</a>
+               </div>
+         
+               <div class="box">
+                  <div class="tenant">
+                     <img src="\images\pic-3.jpg" alt="" width="50">
+                     <div class="info">
+                        <h3>John Cena</h3>
+                        <span>21-11-2023</span>
+                     </div>
+                  </div>
+                  <div class="thumb">
+                     <img src="\images\s.webp" alt="" width="250">
+                  </div>
+                  <h3 class="title">Two bedroom Flat in Ealing</h3>
+                  <a href="{{url_for("upload_lease_tenant")}}" class="inline-btn">View lease</a>
+               </div>
+         
+               <div class="box">
+                  <div class="tenant">
+                     <img src="\images\pic-4.jpg" alt="" width="50">
+                     <div class="info">
+                        <h3>John Deo</h3>
+                        <span>21-10-2022</span>
+                     </div>
+                  </div>
+                  <div class="thumb">
+                     <img src="\images\850.jpeg" alt="" width="250">
+                  </div>
+                  <h3 class="title">Four bedroom house in Surrey</h3>
+                  <a href="{{url_for("upload_lease_tenant")}}" class="inline-btn">View lease</a>
+               </div>
+         
+            </div>
+         
+         </section>
+         
+
+   
+
+</section>
+
+<footer class="footer">
+
+    &copy; copyright @ 2023 by <span>Rental Buddy</span> | all rights reserved!
+ 
+ </footer>
+ 
+ <!-- custom js file link  -->
+ <script src="js/portal.js"></script>
+ 
+    
+ </body>
+ </html>

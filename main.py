@@ -53,7 +53,7 @@ def check():
             else:
                 print("Not a landlord")
         if request.form.get("upload"):
-            return redirect(url_for("upload_lease"))
+            return redirect(url_for("upload_lease_landlord"))
     return render_template("check.html", logout_form=logout_form, portal_form=portal_form)
 
 
@@ -278,25 +278,26 @@ def tenant():
     return render_template('Tenant.html')
 
 
+
 @app.route("/Landlord")
 @login_required
 def landlord_homepage():
     return render_template("landlord/homepage.html")
 
 
-@app.route("/FAQ")
-def faq():
+@app.route("/FAQLandlord")
+def landlord_faq():
     return render_template("landlord/FAQs.html")
 
 
-@app.route("/Contact")
+@app.route("/ContactLandlord")
 def contact():
     return render_template("landlord/contact.html")
 
 
-@app.route('/Upload', methods=['GET', 'POST'])
+@app.route('/UploadLandlord', methods=['GET', 'POST'])
 @login_required
-def upload_lease():
+def upload_lease_landlord():
     display = DisplayForm()
     upform = LeaseUploadForm()
     # Gets all lease IDs for the current user
@@ -371,10 +372,40 @@ def download_lease(leasename):
     return send_from_directory(app.config['UPLOADED_LEASES_DEST'], leasename, as_attachment=True)
 
 
-@app.route("/Settings")
+@app.route("/SettingsLandlord")
 @login_required
-def settings():
+def settings_landlord():
     return render_template("landlord/settings.html")
+
+
+
+
+@app.route("/ContactTenant")
+@login_required
+def contact_tenant():
+    return render_template("tenant/contact.html")
+
+@app.route("/FAQTenant")
+@login_required
+def FAQ_tenant():
+    return render_template("tenant/FAQs.html")
+
+@app.route("/Tenant", methods=['GET', 'POST'])
+# @login_required
+def tenant_homepage():
+    return render_template('tenant/homepage.html')
+
+@app.route("/SettingsTenant")
+@login_required
+def settings_tenant():
+    return render_template("tenant/settings.html")
+#TODO Tenant upload?
+
+@app.route("/UploadTenant")
+@login_required
+def upload_lease_tenant():
+    return render_template("tenant/lease.html")
+
 
 
 if __name__ == '__main__':
