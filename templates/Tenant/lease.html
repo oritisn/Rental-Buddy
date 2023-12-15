@@ -14,181 +14,41 @@
 
 </head>
 <body>
-  
-{% include "landlord/header.html" %}
+
+{% include "tenant/header.html" %}
 
 
 <section class="home-grid">
 
    <h1 class="heading">Lease agreement</h1>
 
-   <body>
-   
       
-      <form action="#">
-          <div>
-          <label class="desc" id="title106" for="Field106">
-             What type of premises are you renting?
-          </label>
-          <div>
-          <select id="Field106" name="Field106" class="field select medium" tabindex="11"> 
-            <option value="First Choice">House</option>
-            <option value="Second Choice">Flat</option>
-            <option value="Third Choice">Other</option>
-          </select>
-             If selected other please specify 
-           <div>
-            <textarea id="Field4" name="Field4" spellcheck="true" rows="10" cols="50" tabindex="4"></textarea>
-          </div>
-          </div>
-        </div>
-        
-        <div>
-          <label class="desc" id="title1" for="Field1">What is the address of the premise?</label>
-          <div>
-            <input id="Field1" name="Field1" type="text" class="field text fn" value="" size="8" tabindex="1">
-          </div>
-          (e.g.Street, City, Country, Postcode)
-        </div>
-        
-        <div>
-          <label class="desc" id="title1" for="Field1">Who is the landlord?</label>
-          <div>
-            Name
-            <input id="Field1" name="Field1" type="text" class="field text fn" value="" size="8" tabindex="1">
-          </div> 
-          <div>
-          <fieldset>
-            
-               <div>
-               <input id="radioDefault_5" name="Field5" type="hidden" value="">
-               <div>
-                  <input id="Field5_0" name="Field5" type="radio" value="First Choice" tabindex="5" checked="checked">
-                  <label class="choice" for="Field5_0">Person</label>
-               </div>
-              <div>
-                 <input id="Field5_1" name="Field5" type="radio" value="Second Choice" tabindex="6">
-                 <label class="choice" for="Field5_1">Company</label>
-              </div>
-              <div>
-              </div>
-            </div>
-          </fieldset>
-        </div>
-        </div>
-        <div>
-            Adress
-            <input id="Field1" name="Field1" type="text" class="field text fn" value="" size="8" tabindex="1">
-          </div> 
-        (e.g.Street, City, Country, Postcode)
-        
-      <div>
-            Payments will be due
-          <input type="date" name="date" value="2017-03-02"/>
-        
-        </div>
+      <h1>Upload new lease</h1>
+
+      {%   if errors != None  %}
+        <font size="+1">{{errors}}</font>
+      {%  else %}
+        File types allowed:{% for e in types %}
+        {{ e }}
+      {% endfor %}
+      {%   endif   %}
+
+      <form method="post" enctype="multipart/form-data">
       
-          <div>
-          <label class="desc" id="title106" for="Field106">
-             Will the tenant be charged extra for late payments?
-          </label>
-          <div>
-          <select id="Field106" name="Field106" class="field select medium" tabindex="11"> 
-            <option value="First Choice">Yes</option>
-            <option value="Second Choice">No</option>
-          </select>
-          </div>
-        </div>
-        
-        <div>
-          <label class="desc" id="title106" for="Field106">
-             Will any security deposit be required?
-          </label>
-          <div>
-          <select id="Field106" name="Field106" class="field select medium" tabindex="11"> 
-            <option value="First Choice">Yes</option>
-            <option value="Second Choice">No</option>
-          </select>
-          </div>
-        </div>
-        
-        
-         <div>
-          <label class="desc" id="title106" for="Field106">
-             Will any pets be allowed on the premises?
-          </label>
-          <div>
-          <select id="Field106" name="Field106" class="field select medium" tabindex="11"> 
-            <option value="First Choice">Yes</option>
-            <option value="Second Choice">No</option>
-          </select>
-          </div>
-        </div>
-        
-          <div>
-          <label class="desc" id="title106" for="Field106">
-             Is smoking indoors allowed?
-          </label>
-          <div>
-          <select id="Field106" name="Field106" class="field select medium" tabindex="11"> 
-            <option value="First Choice">Yes</option>
-            <option value="Second Choice">No</option>
-          </select>
-          </div>
-        </div>
-        
-          <div>
-          <label class="desc" id="title106" for="Field106">
-             Will the tenant be responsible for any routine maintenace?
-          </label>
-          <div>
-          <select id="Field106" name="Field106" class="field select medium" tabindex="11"> 
-            <option value="First Choice">Yes</option>
-            <option value="Second Choice">No</option>
-          </select>
-          </div>
-        </div>
-        Tenant maintenance may include: keeping sidewalks free of snow and ice, 
-      removing weeds from lawns on the premises, but NOT repairs to appliances or building.
-        
-         <div>
-          <label class="desc" id="title106" for="Field106">
-             Will the tenant be responsible for any routine maintenace?
-          </label>
-          <div>
-          <select id="Field106" name="Field106" class="field select medium" tabindex="11"> 
-            <option value="First Choice">Yes</option>
-            <option value="Second Choice">No</option>
-          </select>
-          </div>
-        </div>
-        Tenant maintenance may include: keeping sidewalks free of snow and ice, 
-      removing weeds from lawns on the premises, but NOT repairs to appliances or building.
-        
-         <div>
-          <label class="desc" id="title106" for="Field106">
-             Would you like to include any additional terms in your tenancy agreement?
-          </label>
-          <div>
-          <select id="Field106" name="Field106" class="field select medium" tabindex="11"> 
-            <option value="First Choice">Yes</option>
-            <option value="Second Choice">No</option>
-          </select>
-          </div>
-        </div>
-        You should  include an additional clause if there are other terms or issues unique to your situation
-       that have not been addressed in the questionnaire. In order to reduce confusion, write your clauses 
-      with plain language and limit them each to paragraph in length. Also, use any predefined terms such as Tenant,
-      Property, landlord, etc in your clauses. 
-        <div>
-        <label class="desc" id="title4" for="Field4">
-            Clause
-          </label>
-        
-          <div>
-            <textarea id="Field4" name="Field4" spellcheck="true" rows="10" cols="50" tabindex="4"></textarea>
-            
-          </div>
+      {{upform.hidden_tag()}}
+      {{upform.lease(size=20)}}
+      {{upform.submit(size=20)}}
+<div>
+    <form method="post" enctype="multipart/form-data" target="_blank">
+        {% for lease in lease_names %}
+            {% set lease_name_without_extension = lease.split('.')[0] %}
+
+            <a href="{{ url_for('download_lease', leasename=lease) }}" download="{{ lease }}" style="display:none">Download {{ lease_name_without_extension }}</a>
+            <button type="button" onclick="document.querySelector('a[download=\'{{ lease }}\']').click()">{{ lease_name_without_extension }}</button>
+        {% endfor %}
+    </form>
+</div>
+      </body>
 
         
      
@@ -203,8 +63,7 @@
  
  </footer>
  
- <!-- custom js file link  -->
- <script src="js/portal.js"></script>
+
  
     
  </body>
