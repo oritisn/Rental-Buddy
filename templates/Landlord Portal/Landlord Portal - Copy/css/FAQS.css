@@ -1,0 +1,69 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+body {  
+  margin: 0;
+  font-size: 100%;
+}
+h2 {
+  text-align: center;
+  font-family: "museo-slab", sans-serif;
+  font-size: 2.5em;
+}
+
+#faqs {
+  font-size: 0.9em;
+  font-family: Roboto;
+}
+#faqs .questions {
+  background: #FFF;
+  box-shadow: 1px 2px 1px 0 rgba(0, 0, 0, 0.02);
+  width: 800px;
+  margin: 0 auto;
+  max-width: 100%;
+}
+#faqs .questions dl {
+  padding: 0;
+  font-size: 1.1em;
+}
+#faqs .questions dl dt, #faqs .questions dl dd {
+  margin: 0;
+  padding: 2.5% 5% 2.5% 2.5%;
+  list-style: none;
+  position: relative; 
+}
+#faqs .questions dl dt {
+  cursor: pointer;
+  font-weight: 800;
+  position: relative;
+  background: #f0f0f0;
+  box-shadow: 1px 2px 1px 0 rgba(0, 0, 0, 0.02); 
+}
+#faqs .questions dl dt:after {
+  content: '+';
+  font-size: 1.8em;
+  font-weight: 100;
+  position: absolute;
+  display: block;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  transform: translateY(-50%);
+  right: 20px;
+}
+#faqs .questions dl dt.active {
+  border-bottom: none;
+}
+#faqs .questions dl dt.active:after {
+  content: '-';
+}
+#faqs .questions dl dt:hover {
+  background: #eaeaea;
+}
+#faqs .questions dl dd {
+  font-weight: 100;
+  display: none; 
+}
+#faqs .questions dl dd.active {
+  display: block;
+  border-bottom: 1px solid #EEE; 
+}

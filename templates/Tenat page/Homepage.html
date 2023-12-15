@@ -22,7 +22,7 @@
       <a href="{{url_for("landlord_homepage")}}" class="logo">Rental Buddy</a>
 
       <form action="search.html" method="post" class="search-form">
-         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+         <input type="text" name="search_box" required placeholder="search leases..." maxlength="100">
          <button type="submit" class="fas fa-search"></button>
       </form>
 
@@ -34,9 +34,9 @@
       </div>
 
       <div class="profile">
-         <img src="C:\Users\Student\Downloads\front-end - Endeavour website (1)\desgin\images\pic-7.jpg" class="image" alt="">
+         <img src="images/pic-8.jpg" class="image" alt="">
          <h3 class="name">{{current_user.username}}</h3>
-         <p class="role">Landlord</p>
+         <p class="role">Tenant</p>
          <div class="flex-btn">
             <a href="logout.html" class="option-btn">Logout</a>
          </div>
@@ -53,9 +53,9 @@
    </div>
 
    <div class="profile">
-      <img src="C:\Users\Student\Downloads\front-end - Endeavour website (1)\desgin\images\pic-7.jpg" class="image" alt="">
+      <img src="\images/pic-8.jpg" class="image" alt="">
       <h3 class="name">{{current_user.username}}</h3>
-      <p class="role">Landlord</p>
+      <p class="role">Tenant</p>
       <a href="profile.html" class="btn">View profile</a>
    </div>
 
@@ -87,12 +87,12 @@
         
          <section class="leases">
 
-            <h1 class="heading">My Leases</h1>
+            <h1 class="heading">Leases</h1>
          
             <div class="box-container">
          
                <div class="box">
-                  <div class="Tenant">
+                  <div class="tenant">
                      <img src="\images\pic-2.jpg" alt="" width="50">
                      <div class="info">
                         <h3>Jane Deo</h3>
@@ -107,7 +107,7 @@
                </div>
          
                <div class="box">
-                  <div class="tutor">
+                  <div class="tenant">
                      <img src="\images\pic-3.jpg" alt="" width="50">
                      <div class="info">
                         <h3>John Cena</h3>
@@ -122,7 +122,7 @@
                </div>
          
                <div class="box">
-                  <div class="tutor">
+                  <div class="tenant">
                      <img src="\images\pic-4.jpg" alt="" width="50">
                      <div class="info">
                         <h3>John Deo</h3>
@@ -152,7 +152,7 @@
  </footer>
  
  <!-- custom js file link  -->
- <script src="js/script.js"></script>
+ <script src="js/portal.js"></script>
  
     
  </body>
