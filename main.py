@@ -273,9 +273,9 @@ def index():
 
 
 @app.route("/Tenant", methods=['GET', 'POST'])
-# @login_required
-def tenant_homepage():
-    return render_template('tenant/homepage.html')
+@login_required
+def tenant():
+    return render_template('Tenant.html')
 
 
 @app.route("/Landlord")
@@ -331,6 +331,18 @@ def upload_lease():
                 print(db.session.query(Landlord).filter_by(user_id=current_user.get_id()).first())
             except Exception as e:
                 print(e)
+    if display.submit2.data and display.validate():
+        print("Display clicked")
+        leases1 = db.session.query(Lease.file_name).join(Lease.landlord).filter_by(
+            landlord_id=Landlord.landlord_id).all()
+        try:
+            lease_target = leases1[0][0]
+        except IndexError:
+            return render_template("landlord/lease.html", lease_names=lease_names, upform=upform,
+                                   errors="No current leases",
+                                   types=leases.extensions, display=display)
+        # yield send_from_directory(app.config['UPLOADED_LEASES_DEST'], lease_target)
+        print("test successful")
     return render_template("landlord/lease.html", lease_names=lease_names, upform=upform, errors=None,
                            types=leases.extensions, display=display)
 
@@ -355,11 +367,9 @@ def LandlordTenantChoice():
 
 @app.route('/download_lease/<leasename>')
 def download_lease(leasename):
-    print(f"Attempting to download {leasename}")
-    try:
-        return send_from_directory(app.config['UPLOADED_LEASES_DEST'], leasename, as_attachment=True)
-    except:
-        return redirect(url_for("index"))
+    """returns the given lease file"""
+    return send_from_directory(app.config['UPLOADED_LEASES_DEST'], leasename, as_attachment=True)
+
 
 @app.route("/Settings")
 @login_required

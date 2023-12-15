@@ -10,7 +10,7 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/landlord/landlord.css">
+   <link rel="stylesheet" href="css/landlord.css">
 
 </head>
 <body>
@@ -22,11 +22,12 @@
 
    <h1 class="heading">Lease agreement</h1>
 
+   <body>
       
       <h1>Upload new lease</h1>
 
       {%   if errors != None  %}
-        <font size="+1">{{errors}}</font>
+        <font size="+2">{{errors}}</font>
       {%  else %}
         File types allowed:{% for e in types %}
         {{ e }}
@@ -38,15 +39,14 @@
       {{upform.hidden_tag()}}
       {{upform.lease(size=20)}}
       {{upform.submit(size=20)}}
-<div>
-    <form method="post" enctype="multipart/form-data" target="_blank">
-        {% for lease in lease_names %}
-            {% set lease_name_without_extension = lease.split('.')[0] %}
-
-            <a href="{{ url_for('download_lease', leasename=lease) }}" download="{{ lease }}" style="display:none">Download {{ lease_name_without_extension }}</a>
-            <button type="button" onclick="document.querySelector('a[download=\'{{ lease }}\']').click()">{{ lease_name_without_extension }}</button>
-        {% endfor %}
-    </form>
+          <div>
+<form method="post" enctype="multipart/form-data" target="_blank">
+    {% for lease in lease_names %}
+        {% set lease_name_without_extension = lease.split('.')[0] %}
+        <a id="downloadLink{{ loop.index }}" href="{{ url_for('download_lease', leasename=lease) }}" style="display:none">Download {{ lease_name_without_extension }}</a>
+        <button onclick="document.getElementById('downloadLink{{ loop.index }}').click();">Download {{ lease_name_without_extension }}</button>
+    {% endfor %}
+</form>
 </div>
       </body>
 
@@ -63,7 +63,8 @@
  
  </footer>
  
-
+ <!-- custom js file link  -->
+ <script src="js/script.js"></script>
  
     
  </body>

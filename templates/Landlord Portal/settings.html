@@ -10,7 +10,7 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/landlord/landlord.css">
+   <link rel="stylesheet" href="css/landlord.css">
 
 </head>
 <body>
@@ -22,7 +22,7 @@
       <a href="{{url_for("landlord_homepage")}}" class="logo">Rental Buddy</a>
 
       <form action="search.html" method="post" class="search-form">
-         <input type="text" name="search_box" required placeholder="search leases..." maxlength="100">
+         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
          <button type="submit" class="fas fa-search"></button>
       </form>
 
@@ -53,18 +53,31 @@
    </div>
 
    <div class="profile">
+<<<<<<< HEAD
       <img src="\images\pic-7.jpg" class="image" alt="">
+      <h3 class="name">Naima Mohamed</h3>
+=======
+      <img src="C:\Users\Student\Downloads\front-end - Endeavour website (1)\desgin\images\pic-7.jpg" class="image" alt="">
       <h3 class="name">{{current_user.username}}</h3>
+>>>>>>> 440f901cff882c506c2a451a83aa5208db14ffb7
       <p class="role">Landlord</p>
       <a href="profile.html" class="btn">View profile</a>
    </div>
 
    <nav class="navbar">
+<<<<<<< HEAD
+    <a href="Homepage.html"><i class="fas fa-house-user"></i><span>Home</span></a>
+    <a href="lease.html"><i class="fa-solid fa-pencil"></i><span>Lease</span></a>
+    <a href="FAQs.html"><i class="fa-solid fa-question"></i></i><span>FAQs</span></a>
+    <a href="settings.html"><i class="fa-solid fa-gears"></i></i><span>Settings</span></a>
+    <a href="contact.html"><i class="fas fa-phone"></i><span>Contact us</span></a>
+=======
     <a href="{{url_for("landlord_homepage")}}"><i class="fas fa-house-user"></i><span>Home</span></a>
     <a href="{{url_for("upload_lease")}}"><i class="fa-solid fa-pencil"></i><span>Lease</span></a>
     <a href="{{url_for("faq")}}"><i class="fa-solid fa-question"></i></i><span>FAQs</span></a>
     <a href="{{url_for("settings")}}"><i class="fa-solid fa-gears"></i></i><span>Settings</span></a>
     <a href="{{url_for("contact")}}"><i class="fas fa-phone"></i><span>Contact us</span></a>
+>>>>>>> 440f901cff882c506c2a451a83aa5208db14ffb7
  </nav>
 
 </div>
@@ -75,6 +88,19 @@
 
    <div class="box-container">
 
+<<<<<<< HEAD
+=======
+      <div class="row">
+        <div class="image">
+            <image src="\images\image for home page.PNG" alt="">  
+            </image>
+            
+            <div class="more-btn">
+      <a href="{{url_for("upload_lease")}}" class="inline-option-btn">Start new leases</a>
+   </div>
+         </div>
+        
+>>>>>>> 440f901cff882c506c2a451a83aa5208db14ffb7
          <section class="form-container">
 
             <form action="" method="post" enctype="multipart/form-data">
