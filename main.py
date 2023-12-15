@@ -273,9 +273,9 @@ def index():
 
 
 @app.route("/Tenant", methods=['GET', 'POST'])
-@login_required
+# @login_required
 def tenant():
-    return render_template('Tenant.html')
+    return render_template('tenant/homepage.html')
 
 
 @app.route("/Landlord")
