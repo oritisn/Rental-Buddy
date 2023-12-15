@@ -55,15 +55,15 @@
    <div class="profile">
       <img src="\images\pic-7.jpg" class="image" alt="">
       <h3 class="name">{{current_user.username}}</h3>
-      <p class="role">LTenant</p>
+      <p class="role">Tenant</p>
       <a href="profile.html" class="btn">View profile</a>
    </div>
 
    <nav class="navbar">
     <a href="{{url_for("landlord_homepage")}}"><i class="fas fa-house-user"></i><span>Home</span></a>
-    <a href="{{url_for("upload_lease")}}"><i class="fa-solid fa-pencil"></i><span>Lease</span></a>
-    <a href="{{url_for("faq")}}"><i class="fa-solid fa-question"></i></i><span>FAQs</span></a>
-    <a href="{{url_for("settings")}}"><i class="fa-solid fa-gears"></i></i><span>Settings</span></a>
+    <a href="{{url_for("upload_lease_tenant")}}"><i class="fa-solid fa-pencil"></i><span>Lease</span></a>
+    <a href="{{url_for("landlord_faq")}}"><i class="fa-solid fa-question"></i></i><span>FAQs</span></a>
+    <a href="{{url_for("settings_tenant")}}"><i class="fa-solid fa-gears"></i></i><span>Settings</span></a>
     <a href="{{url_for("contact")}}"><i class="fas fa-phone"></i><span>Contact us</span></a>
  </nav>
 
