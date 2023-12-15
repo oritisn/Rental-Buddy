@@ -274,7 +274,7 @@ def index():
 
 @app.route("/Tenant", methods=['GET', 'POST'])
 # @login_required
-def tenant():
+def tenant_homepage():
     return render_template('tenant/homepage.html')
 
 
