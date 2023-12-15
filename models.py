@@ -54,8 +54,6 @@ class User(UserMixin, db.Model):
         return f'User: {self.username}' \
                f'email: {self.email}' \
                f'date added: {self.date_added}'
-
-
 class Tenant(db.Model):
     tenant_id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
